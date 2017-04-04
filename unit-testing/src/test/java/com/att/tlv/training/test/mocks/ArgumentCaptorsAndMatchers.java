@@ -18,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ArgumentCaptors {
+public class ArgumentCaptorsAndMatchers {
     
     private Adder adder;
     @Mock private IntPairAdder intPairAdder;

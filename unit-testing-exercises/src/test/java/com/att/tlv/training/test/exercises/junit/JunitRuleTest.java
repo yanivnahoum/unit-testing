@@ -7,7 +7,7 @@ import org.junit.Test;
  * before the tests, and another message after EACH test.
  * 
  */
-public class JunitRuleTestAnswer {
+public class JunitRuleTest {
 
     @Test
     public void test1() {

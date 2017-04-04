@@ -101,7 +101,7 @@ public class MoreAssertions {
             assertThat(s).endsWith("thing");
         });
         
-        // Specialized optionals ha
+        // Specialized optionals
         OptionalInt optionalInt = OptionalInt.of(12);
         assertThat(optionalInt).isPresent()
                             .hasValue(12);        

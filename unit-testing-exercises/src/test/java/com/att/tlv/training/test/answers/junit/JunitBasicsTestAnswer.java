@@ -9,7 +9,7 @@ import org.junit.Test;
  * before the tests, and another message after EACH test. 
  * 
  */
-public class BasicJunitTestAnswer {
+public class JunitBasicsTestAnswer {
     
     @BeforeClass
     public static void setUpClass() {

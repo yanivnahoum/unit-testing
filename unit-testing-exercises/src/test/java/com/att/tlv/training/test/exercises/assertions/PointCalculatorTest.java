@@ -1,12 +1,13 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import com.att.tlv.training.test.exercises.data.Point;
-
+/**
+ * Note the name & location of this test:
+ * It's called the same as the class under test with the suffix 'Test'.
+ * It's located in the same package as the class under test, under src/test/java
+ */
 public class PointCalculatorTest {
     
     private PointCalculator pointCalculator;
@@ -21,40 +22,18 @@ public class PointCalculatorTest {
      */
     @Test
     public void testAdd() {
-        int aX = 1, aY = 2;
-        int bX = 3, bY = 4;
-        Point a = new Point(aX, aY);
-        Point b = new Point(bX, bY);
-        
-        Point result = pointCalculator.add(a, b);
-        
-        int expectedX = aX + bX;
-        int expectedY = aY + bY;
-        assertThat(result.getX()).isEqualTo(expectedX);
-        assertThat(result.getY()).isEqualTo(expectedY);
-        
-        // Or...        
-        Point expected = new Point(expectedX, expectedY);
-        assertThat(result).isEqualToComparingFieldByField(expected);
+        // TODO test PointCalculator.add.
     }
     
     @Test
     public void testAddPointAndOrigin() {
-        Point a = new Point(1, 2);
-        Point origin = new Point(0, 0);
-        
-        Point result = pointCalculator.add(a, origin);
-        
-        assertThat(result).isSameAs(a);
+        // TODO test PointCalculator.add. Make sure it
+        // returns the expected result for non-origin Points.
     }
     
     @Test
     public void testAddOriginAndPoint() {
-        Point a = new Point(1, 2);
-        Point origin = new Point(0, 0);
-        
-        Point result = pointCalculator.add(origin, a);
-        
-        assertThat(result).isSameAs(a);
+        // TODO test PointCalculator.add. Make sure it
+        // returns the expected result for non-origin Points.
     }
 }

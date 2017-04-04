@@ -23,7 +23,7 @@ public class MockCreation {
     @Test
     public void cannotCreate() {
         // There are a few types we can't create:
-        // Final classes:
+        // Final classes / methods
         String str = mock(String.class);    
         // Enums:
         DayOfWeek dayOfWeek = mock(DayOfWeek.class); 

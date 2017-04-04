@@ -33,7 +33,6 @@ public class LinkedHashMapTestAnswer {
     
     @Test
     public void testPutTwoEntries() {
-        Map<Long, Person> map = new LinkedHashMap<>();
         map.put(ALICE.getId(), ALICE);
         map.put(BOB.getId(), BOB);
         

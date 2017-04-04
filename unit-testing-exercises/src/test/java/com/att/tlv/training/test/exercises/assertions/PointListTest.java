@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import com.att.tlv.training.test.exercises.data.Point;
 
+/**
+ * Go over all the public methods of {@link PointList}.
+ * Below you'll find a test for each one of them.
+ */
 public class PointListTest {
 
     private static final Point P1 = new Point(1, 2);
@@ -46,7 +50,7 @@ public class PointListTest {
 
     @Test
     public void testSize() {
-        // TODO test
+        // TODO after obtaining a list with 3 arguments, test its size.
     }
 
     @Test

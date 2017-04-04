@@ -126,10 +126,10 @@ public class BasicAssertions {
     }
 
     @Test
-    public void iterable_assertions_testing_elements_type() throws Exception {
-        List<Number> numbers = newArrayList(1, 2L);
+    public void test_hasOnlyElementsOfType_hasAtLeastOneElementOfType() throws Exception {
+        List<Number> numbers = newArrayList(1, 2.567);
 
         assertThat(numbers).hasOnlyElementsOfType(Number.class)
-                .hasAtLeastOneElementOfType(Long.class);
+                .hasAtLeastOneElementOfType(Double.class);
     }
 }
