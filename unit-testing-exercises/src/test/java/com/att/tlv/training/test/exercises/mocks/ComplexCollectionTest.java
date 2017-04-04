@@ -2,10 +2,9 @@ package com.att.tlv.training.test.exercises.mocks;
 
 import org.junit.Test;
 
-import com.att.tlv.training.test.exercises.data.ComplexCollection;
 import com.att.tlv.training.test.exercises.data.Person;
 
-public class VerificationTest {
+public class ComplexCollectionTest {
     
     // Class under test:
     private ComplexCollection<Long, Person> complexCollection;

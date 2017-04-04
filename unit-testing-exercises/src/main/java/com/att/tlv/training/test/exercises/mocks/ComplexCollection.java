@@ -1,4 +1,4 @@
-package com.att.tlv.training.test.exercises.data;
+package com.att.tlv.training.test.exercises.mocks;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

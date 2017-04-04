@@ -17,11 +17,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.att.tlv.training.test.exercises.data.ComplexCollection;
 import com.att.tlv.training.test.exercises.data.Person;
+import com.att.tlv.training.test.exercises.mocks.ComplexCollection;
 
 @RunWith(MockitoJUnitRunner.class)
-public class VerificationTestAnswer {
+public class ComplexCollectionTestAnswer {
     
     private static final Person ALICE = new Person(500, "Alice");
     private ComplexCollection<Long, Person> complexCollection;
