@@ -6,11 +6,11 @@ public class ThrowerTest {
     
     @Test
     public void testAddExactOverflow() {
-        // TODO test
+        // TODO test Thrower.addExact
     }
     
     @Test
     public void testThrowNestedException() {
-        // TODO test
+        // TODO test Thrower.throwNestedException
     }
 }
