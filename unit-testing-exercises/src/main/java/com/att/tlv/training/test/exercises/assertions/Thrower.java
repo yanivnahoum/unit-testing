@@ -1,4 +1,4 @@
-package com.att.tlv.training.test.exercises.data;
+package com.att.tlv.training.test.exercises.assertions;
 
 public class Thrower {
     

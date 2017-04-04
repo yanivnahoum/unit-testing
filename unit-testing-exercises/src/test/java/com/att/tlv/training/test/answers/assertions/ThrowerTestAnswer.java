@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Test;
 
-import com.att.tlv.training.test.exercises.data.Thrower;
+import com.att.tlv.training.test.exercises.assertions.Thrower;
 
 public class ThrowerTestAnswer {
     
