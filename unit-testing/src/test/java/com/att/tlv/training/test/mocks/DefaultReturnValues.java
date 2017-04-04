@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -71,6 +72,11 @@ public class DefaultReturnValues {
     }
     
     @Test
+    public void assertThatStringReturnsNull() {
+        assertThat(demo.getString()).isNull();
+    }
+    
+    @Test
     public void assertThatArrayReturnsNull() {
         assertThat(demo.getObjectArray()).isNull();
     }
@@ -90,5 +96,25 @@ public class DefaultReturnValues {
     @Test
     public void assertThatStreamReturnsEmptyStream() {
         assertThat(demo.getStream()).isEmpty();
+    }
+    
+    @Test
+    public void assertThatOptionalReturnsEmptyOptional() {
+        assertThat(demo.getOptional()).isEmpty();
+        assertThat(demo.getOptionalInt()).isEmpty();
+        assertThat(demo.getOptionalLong()).isEmpty();
+        assertThat(demo.getOptionalDouble()).isEmpty();
+    }
+    
+    @Test
+    public void assertThatMockedTypeReturnsNull() {
+        assertThat(demo.getMe()).isNull();
+    }
+    
+    @Mock(answer = Answers.RETURNS_SELF)
+    private Demo fluentDemo;
+    @Test
+    public void assertThatMockedTypeReturnsItself() {
+        assertThat(fluentDemo.getMe()).isEqualTo(fluentDemo);
     }
 }
