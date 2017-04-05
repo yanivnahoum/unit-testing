@@ -19,8 +19,8 @@ public class PointCalculatorTestAnswer {
 
     @Test
     public void testAdd() {
-        int aX = 1, aY = 2;
-        int bX = 3, bY = 4;
+        int aX = 0, aY = 2;
+        int bX = 3, bY = 0;
         Point a = new Point(aX, aY);
         Point b = new Point(bX, bY);
         
