@@ -65,10 +65,10 @@ public class IterableAssertions {
 
     @Test
     public void testIterable_containsExactly() {
-        Iterable<String> animals = newArrayList("cat", "dog", "pig");
-        assertThat(animals).containsExactly("cat", "dog", "pig")
+        Iterable<String> animals = newArrayList("cat", "dog", "pig", "pig");
+        assertThat(animals).containsExactly("cat", "dog", "pig", "pig")
                 .containsOnly("pig", "cat", "dog")
-                .containsExactlyInAnyOrder("pig", "cat", "dog");
+                .containsExactlyInAnyOrder("pig", "pig", "cat", "dog");
 
         // It works with collections that have a consistent iteration order (i.e. not HashSet)
         SortedSet<String> sortedAnimals = new TreeSet<>();
@@ -78,7 +78,7 @@ public class IterableAssertions {
         assertThat(sortedAnimals).containsExactly("cat", "dog", "pig");
 
         // Expected values can be given by another Iterable. Must be in the same order (unlike containsOnlyElementsOf)
-        assertThat(animals).containsExactlyElementsOf(sortedAnimals);
+        assertThat(sortedAnimals).containsExactlyElementsOf(newArrayList("cat", "dog", "pig"));
     }
 
     @Test
@@ -130,10 +130,12 @@ public class IterableAssertions {
         
         // For lists, you can check element at a given index (we use Assertions.atIndex(int) syntactic sugar for better readability):
         List<Person> people = newArrayList(jim, carl);
-        assertThat(people).contains(jim, atIndex(0)).contains(carl, atIndex(1));
+        assertThat(people).contains(jim, atIndex(0))
+                .contains(carl, atIndex(1));
         
         // And the same goes for arrays:
         Person[] peopleArray = { jim, carl };
-        assertThat(peopleArray).contains(jim, atIndex(0)).contains(carl, atIndex(1));
+        assertThat(peopleArray).contains(jim, atIndex(0))
+                .contains(carl, atIndex(1));
     }
 }

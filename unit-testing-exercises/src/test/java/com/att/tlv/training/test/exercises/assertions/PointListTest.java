@@ -20,8 +20,8 @@ public class PointListTest {
     }
 
     @Test
-    public void testOfWithSingleArguments() {
-        // TODO test
+    public void testOfWithSingleArgument() {
+        // TODO test PointList.of(Point p)
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PointListTest {
 
     @Test
     public void testOfWithSinglePointCoordinates() {
-        // TODO test
+        // TODO test PointList.of(int x, int y)
     }
 
     @Test
