@@ -12,7 +12,7 @@ import org.junit.rules.TestRule;
  * before the tests, and another message after EACH test.
  * 
  */
-public class JunitRuleTestAnswer {
+public class JunitRulesTestAnswer {
     
     @ClassRule
     public static TestRule before = new BeforeLoggingRule("Running set up before class...");
