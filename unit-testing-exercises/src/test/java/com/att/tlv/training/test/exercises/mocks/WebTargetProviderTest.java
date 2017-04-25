@@ -28,10 +28,12 @@ public class WebTargetProviderTest {
     @Test
     public void testGetWithInvalidURL() {
         // TODO test WebTargetProvider.get() with an invalid url - Client.target throws an IllegalArgumentException
+        // We'd like to make sure it isn't suppressed.
     }
     
     @Test
     public void testGetWithNullURL() {
         // TODO test WebTargetProvider.get() with a null url - Client.target throws a NullPointerException
+        // We'd like to make sure it isn't suppressed.
     }
 }

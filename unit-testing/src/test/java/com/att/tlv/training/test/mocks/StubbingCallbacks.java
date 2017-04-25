@@ -33,7 +33,7 @@ public class StubbingCallbacks {
         // by calling invocation.getArgument(0),  
         // or much simpler, use AdditionalAnswers.answer()
         when(strings.add(anyString())).thenAnswer(answer(this::logAdd));        
-        assertThat(strings.add("hello")).isTrue();
+        assertThat(strings.add("Hey there!")).isTrue();
     }
     
     private boolean logAdd(String element) {

@@ -1,6 +1,5 @@
 package com.att.tlv.training.test.mocks;
 
-import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
@@ -40,7 +39,7 @@ public class VerifyingBehavior {
             // This will fail of course
             verify(numbers).add(2);
             
-            fail("We should never reach this line!");
+            failTest("We should never reach this line!");
         }
         catch (AssertionError ignore) {
             // Do nothing
@@ -63,7 +62,7 @@ public class VerifyingBehavior {
             // It's short for this:
             verify(numbers, times(1)).add(anyInt());
             
-            fail("We should never reach this line!");
+            failTest("We should never reach this line!");
         }
         catch (AssertionError ignore) {
             // Do nothing
@@ -94,10 +93,22 @@ public class VerifyingBehavior {
         verify(numbers).add(2);
         verify(numbers).add(1);
         
-        // But what id it really does? InOrder at your service:
+        // But what if  it really does? InOrder at your service:
         InOrder inOrder = inOrder(numbers);
         inOrder.verify(numbers).add(1);
         inOrder.verify(numbers).add(2);
+        
+        try {
+            InOrder inOrder2 = inOrder(numbers);
+            inOrder2.verify(numbers).add(2);
+            // This will fail, add(1) is expected BEFORE add(2)
+            inOrder2.verify(numbers).add(1);
+            
+            failTest("We should never reach this line!");
+        }
+        catch (AssertionError ignore) {
+            // Do nothing
+        }
     }
     
     @Test
@@ -112,5 +123,9 @@ public class VerifyingBehavior {
 
         // Verify that other mocks were not interacted
         verifyZeroInteractions(someOtherMock);
+    }
+    
+    private static void failTest(String message) {
+        throw new UnsupportedOperationException(message);
     }
 }

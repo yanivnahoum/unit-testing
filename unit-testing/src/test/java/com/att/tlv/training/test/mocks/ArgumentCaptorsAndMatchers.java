@@ -42,6 +42,8 @@ public class ArgumentCaptorsAndMatchers {
     @Test
     public void testAddUsingCaptor() {
         int expected = 101;
+        // When stubbing, we obviously don't have the IntPair instance that will be specified to calculateSum()
+        // so we use the ArgumentMatcher any().
         when(intPairAdder.calculateSum(any())).thenReturn(expected);
         
         int x = 5;
@@ -73,6 +75,8 @@ public class ArgumentCaptorsAndMatchers {
         
         // assert that the value obtained is actually the one returned
         assertThat(value).isEqualTo(expected);
+        // Note that there's no need to verify calculateSum was called, since there's no
+        // other way we could have received the expected result
     }
     
     private static ArgumentMatcher<IntPair> isIntPairOf(int x, int y) {

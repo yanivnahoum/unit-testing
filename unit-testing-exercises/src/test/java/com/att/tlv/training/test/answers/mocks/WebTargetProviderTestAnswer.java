@@ -38,6 +38,8 @@ public class WebTargetProviderTestAnswer {
         WebTarget actualTarget = webTargetProvider.get(URL);
         
         assertThat(actualTarget).isSameAs(webTarget);
+        // The following verification is actually not needed since we already made sure we got the webTarget.
+        // How else could the code have returned it??
         verify(client).target(URL);
     }
     
@@ -45,12 +47,11 @@ public class WebTargetProviderTestAnswer {
     public void testGetExisting() {
         when(client.target(URL)).thenReturn(webTarget);
         
+        webTargetProvider.get(URL);
         WebTarget actualTarget = webTargetProvider.get(URL);
-        verify(client).target(URL);
-        
-        actualTarget = webTargetProvider.get(URL);
         
         assertThat(actualTarget).isSameAs(webTarget);
+        verify(client).target(URL);
         // We can either verify and then call this, or just call verify once at the end.
         verifyNoMoreInteractions(client);
     }

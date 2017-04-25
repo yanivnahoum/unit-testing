@@ -134,6 +134,7 @@ public class Stubbing {
         assertThatThrownBy(() -> strings.get(4)).isInstanceOf(NullPointerException.class);
     }
     
+    // Why would we need to stub void methods?
     @Test
     public void stubbingVoidMethods() {
         // Unfortunately, this doesn't compile

@@ -9,7 +9,7 @@ import javax.ws.rs.client.WebTarget;
 
 public class WebTargetProvider {
     
-    public final Client client;
+    private final Client client;
     private final Map<String, WebTarget> targets = new HashMap<>();
     
     public WebTargetProvider(Client client) {
