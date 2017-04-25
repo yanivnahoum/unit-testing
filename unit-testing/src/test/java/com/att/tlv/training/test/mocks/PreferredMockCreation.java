@@ -1,5 +1,6 @@
 package com.att.tlv.training.test.mocks;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,10 @@ public class PreferredMockCreation {
 //        MockitoAnnotations.initMocks(this);
 //    }
     
+    @SuppressWarnings("unused")
     @Test
     public void test() {
         boolean added = strings.add("hello");
+        Map<String, List<String>> previousValue = complexMap.put(10L, Collections.emptyMap());
     }
 }

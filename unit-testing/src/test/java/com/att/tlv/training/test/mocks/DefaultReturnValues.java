@@ -2,6 +2,8 @@ package com.att.tlv.training.test.mocks;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -117,4 +119,15 @@ public class DefaultReturnValues {
     public void assertThatMockedTypeReturnsItself() {
         assertThat(fluentDemo.getMe()).isEqualTo(fluentDemo);
     }
+    
+    @Mock
+    private List<Integer> ints;
+    @Test
+    public void assertThatGenericParameterTypesAreTreatedAsObject() {
+        // Although method get returns an Integer, it actually returns T, whose type is erased.
+        // So we get the behavior of List<Object> - which returns null by default.
+        Integer value = ints.get(0);
+        assertThat(value).isNull();
+    }
+    
 }
