@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.intThat;
 import static org.mockito.Mockito.doThrow;
@@ -16,11 +17,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.att.tlv.training.test.data.Person;
+
 @RunWith(MockitoJUnitRunner.class)
 public class Stubbing {
     
     @Mock
     private List<String> strings;
+    @Mock
+    private List<Person> persons;
     
     @Test
     public void basicStubbing() {
@@ -51,19 +56,34 @@ public class Stubbing {
         assertThat(value).isEqualTo("goodbye");
     }
     
+    @Test
     public void stubbingWithArgumentMatchers() {
         // We can stub with argument matchers
         when(strings.get(anyInt())).thenReturn("Shalom");
         String value = strings.get(1024);        
         assertThat(value).isEqualTo("Shalom");
         
-        // Or more complex ones:
+        // Last stub wins, but this one's scope is smaller - so it overrides only one specific case
+        when(strings.get(1024)).thenReturn("Ciao");
+        assertThat(strings.get(1024)).isEqualTo("Ciao");
+        assertThat(strings.get(1)).isEqualTo("Shalom");
+        
+        // Last stub wins, and this one's scope is larger - so it overrides all previous stubbings
+        when(strings.get(anyInt())).thenReturn("Shalom");
+        assertThat(strings.get(1024)).isEqualTo("Shalom");
+        
+        // More complex ones argument matchers
         when(strings.get(intThat(i -> i % 2 == 0))).thenReturn("Even");
         when(strings.get(intThat(i -> i % 2 == 1))).thenReturn("Odd");
         String value1 = strings.get(20);        
         assertThat(value1).isEqualTo("Even");
         String value2 = strings.get(21);        
         assertThat(value2).isEqualTo("Odd");
+        
+        // argThat works with any reference type
+        when(persons.add(argThat(this::isJohn))).thenReturn(true);
+        Person john = new Person(123, "John", 30, 1.88);
+        assertThat(persons.add(john)).isTrue();
         
         // Argument matching with more than one argument:
         when(strings.set(5, "a")).thenReturn("b");
@@ -77,6 +97,10 @@ public class Stubbing {
         when(strings.set(eq(5), anyString())).thenReturn("b");
         previousValue = strings.set(5, "bla bla");        
         assertThat(previousValue).isEqualTo("b");
+    }
+    
+    private boolean isJohn(Person person) {
+        return "John".equals(person.getName());
     }
     
     @Test
@@ -146,9 +170,20 @@ public class Stubbing {
     }
     
     @Test
+    public void stubbingConsecutiveVoidMethods() {
+        doThrow(new IllegalArgumentException())
+                // This call allows us to cancel the previous behavior
+                .doNothing()
+                .when(strings).clear();
+        assertThatThrownBy(() -> strings.clear()).isInstanceOf(IllegalArgumentException.class);
+        strings.clear();
+    }
+    
+    @Test
     public void unnecessaryStubbing() {
         when(strings.get(5)).thenReturn("hello");
         // Comment the following line to see mockito's unnecessary stubbing detection in action 
+        // The whole class must be run, not only this test
         strings.get(5);        
     }
 }

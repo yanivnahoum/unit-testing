@@ -92,7 +92,7 @@ public class DefaultReturnValues {
     
     @Test
     public void assertThatMapReturnsEmptyMap() {
-        assertThat(demo.getStream()).isEmpty();
+        assertThat(demo.getMap()).isEmpty();
     }
     
     @Test
