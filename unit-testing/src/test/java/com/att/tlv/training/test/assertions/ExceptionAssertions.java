@@ -33,7 +33,7 @@ public class ExceptionAssertions {
             // You can check exception message
             assertThat(e).hasMessage("Index: 9, Size: 5");
 
-            // Sometimes message are not entirely predictible, you can then check for start, end or containing string.
+            // Sometimes message are not entirely predictable, you can then check for start, end or containing string.
             assertThat(e).hasMessageStartingWith("Index: 9")
                     .hasMessageContaining("9")
                     .hasMessageEndingWith("Size: 5");
