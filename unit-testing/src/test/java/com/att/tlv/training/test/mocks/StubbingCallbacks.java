@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StubbingCallbacks {
@@ -32,8 +33,14 @@ public class StubbingCallbacks {
         // Then we can either extract it from the 'invocation' argument above
         // by calling invocation.getArgument(0),  
         // or much simpler, use AdditionalAnswers.answer()
-        when(strings.add(anyString())).thenAnswer(answer(this::logAdd));        
+        when(strings.add(anyString())).then(answer(this::logAdd));  
         assertThat(strings.add("Hey there!")).isTrue();
+        
+        // Note that the answer accepts an Answer1/VoidAnswer1, Answer2/VoidAnswer2, ..., Answer5/VoidAnswer5
+        // But the compiler has no way of inferring the input parameters, so they have to be explicitly typed:
+        // This won't work, compiler can't infer that s is a String:
+        // Answer<Boolean> answer = answer(s -> s.length() == 2);
+        Answer<Boolean> answer = answer((String s) -> s.length() == 2);
     }
     
     private boolean logAdd(String element) {

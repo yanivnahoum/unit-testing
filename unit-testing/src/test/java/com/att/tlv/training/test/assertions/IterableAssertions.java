@@ -68,6 +68,7 @@ public class IterableAssertions {
         Iterable<String> animals = newArrayList("cat", "dog", "pig", "pig");
         assertThat(animals).containsExactly("cat", "dog", "pig", "pig")
                 .containsOnly("pig", "cat", "dog")
+                // including duplicates, in any order
                 .containsExactlyInAnyOrder("pig", "pig", "cat", "dog");
 
         // It works with collections that have a consistent iteration order (i.e. not HashSet)
