@@ -32,25 +32,44 @@ public class GuavaCacheTest {
 
     @Test
     public void testInvalidateKey() {
-        // TODO test cache.invalidate(key) with a valid key, before it expires.
-        // Make sure the removal listener is notified with the correct key, value, and removal cause
+        // Test cache.invalidate(key) with a valid key, BEFORE it expires:
+        int key = 10;
+        int value = 100;
+        
+        // When we call put, the cache will save the current time with the specified key.
+        cache.put(key, value);
+        // When we call invalidate(key), the key is removed and a removal notification is fired. 
+        // The removal cause depends on whether the key is still valid, or has already expired.
+        cache.invalidate(key);
+        
+        // TODO Make sure the removal listener is notified with the correct key, value, and removal cause
     }
     
     @Test
     public void testInvalidateExpiredKey() {
-        // TODO test cache.invalidate(key) with key, invalidating it after it expires.
+        // TODO Just like in the previous test, test cache.invalidate(key) with key, invalidating it AFTER it expires.
         // Make sure the removal listener is notified with the correct key, value, and removal cause
     }
     
     @Test
     public void testReplaceKey() {
-        // TODO test replacing an valid key by putting it again in the cache before it expires.
-        // Make sure the removal listener is notified with the correct key, value, and removal cause
+        // Test replacing a key by putting it again in the cache BEFORE it expires.
+        
+        int key = 10;
+        int value1 = 100;
+        int value2 = 101;
+        // When we call put, the cache will save the current time with the specified key.
+        cache.put(key, value1);
+        // When we call put again with the same key, the cache replaces the previous key-value pair
+        // and a removal notification is fired.
+        cache.put(key, value2);
+        
+        // TODO Make sure the removal listener is notified with the correct key, value, and removal cause
     }
     
     @Test
     public void testReplaceExpiredKey() {
-        // TODO test replacing an expired key by putting it again in the cache after it expires.
+        // TODO Just like in the previous test, test replacing a key by putting it again in the cache AFTER it expires.
         // Make sure the removal listener is notified with the correct key, value, and removal cause
     }
 }
