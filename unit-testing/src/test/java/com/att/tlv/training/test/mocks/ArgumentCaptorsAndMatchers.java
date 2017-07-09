@@ -32,7 +32,7 @@ public class ArgumentCaptorsAndMatchers {
     @Test
     public void testSum() {
         // This is just a simple test to serve as a starting point.
-        // There's no delegation of the work here, everything is done by the Adder itself.
+        // There's no delegation of the work here, everything is done by the Calculator itself.
         int x = 5;
         int y = 3;
         int value = adder.sum(x, y);
