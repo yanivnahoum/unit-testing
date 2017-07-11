@@ -28,12 +28,12 @@ public class PointCalculatorTest {
     @Test
     public void testAddPointAndOrigin() {
         // TODO test PointCalculator.add. Make sure it
-        // returns the expected result for non-origin Points.
+        // returns the non-origin Point p when p and an origin point are added (in that order).
     }
     
     @Test
     public void testAddOriginAndPoint() {
         // TODO test PointCalculator.add. Make sure it
-        // returns the expected result for non-origin Points.
+        // returns the non-origin Point p when origin point and p are added (in that order).
     }
 }
