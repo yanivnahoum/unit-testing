@@ -124,12 +124,4 @@ public class BasicAssertions {
         // If we just want to go over all fields / properties:
         assertThat(oneTwo).isEqualToComparingFieldByField(oneTwoClone);
     }
-
-    @Test
-    public void test_hasOnlyElementsOfType_hasAtLeastOneElementOfType() throws Exception {
-        List<Number> numbers = newArrayList(1, 2.567);
-
-        assertThat(numbers).hasOnlyElementsOfType(Number.class)
-                .hasAtLeastOneElementOfType(Double.class);
-    }
 }
