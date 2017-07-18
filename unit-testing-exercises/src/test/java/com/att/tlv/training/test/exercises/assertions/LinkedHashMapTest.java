@@ -27,31 +27,31 @@ public class LinkedHashMapTest {
     
     @Test
     public void testPutTwoEntries() {
-        // TODO test
+        // TODO test calling map.put() twice
     }
     
     @Test
     public void testGetExistingEntry() {
-        // TODO test
+        // TODO test map.get(id) for an existing person
     }
     
     @Test
     public void testGetMissingEntry() {
-        // TODO test
+        // TODO test map.get(id) for a missing person
     }
     
     @Test
     public void testConstructorWithMap() {
-        // TODO test
+        // TODO test new LinkedHashMap<>(sourceMap`)
     }
     
     @Test
     public void testRemoveOneOfTwoEntries() {
-        // TODO test
+        // TODO test put two entries and remove one of them
     }
     
     @Test
     public void testRemoveMissingEntry() {
-        // TODO test
+        // TODO test put two entries and try to remove a third (missing)
     }
 }

@@ -5,6 +5,12 @@ import org.junit.Test;
 
 import com.att.tlv.training.test.exercises.data.Person;
 
+/**
+ * Unlike most collections, this collection does not expose methods for getting elements,
+ * only for adding or removing them. This was done intentionally so that the only way to test
+ * it would be via verifying mock behaviors.
+ * See {@link ComplexCollection}
+ */
 public class ComplexCollectionTest {
     
     // Class under test:

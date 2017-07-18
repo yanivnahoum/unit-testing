@@ -1,12 +1,15 @@
 package com.att.tlv.training.test.mocks;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.intThat;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
@@ -19,7 +22,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.att.tlv.training.test.data.Person;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.StrictStubs.class)
 public class Stubbing {
     
     @Mock
@@ -108,7 +111,7 @@ public class Stubbing {
         // Stub to throw exception:
         when(strings.get(5)).thenThrow(new IllegalArgumentException("Exception thrown by mock"));
         // Assert
-        assertThatThrownBy(() -> strings.get(5)).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> strings.get(5));
     }
     
     @Test
@@ -154,8 +157,8 @@ public class Stubbing {
         assertThatThrownBy(() -> strings.get(4)).isInstanceOf(NullPointerException.class);
         
         // Again, in any additional calls - last stub wins 
-        assertThatThrownBy(() -> strings.get(4)).isInstanceOf(NullPointerException.class);
-        assertThatThrownBy(() -> strings.get(4)).isInstanceOf(NullPointerException.class);
+        assertThatNullPointerException().isThrownBy(() -> strings.get(4));
+        assertThatNullPointerException().isThrownBy(() -> strings.get(4));
     }
     
     // Why would we need to stub void methods?
@@ -166,7 +169,7 @@ public class Stubbing {
         
         // For void methods, use doThrow instead. Note the method call outside of the when clause.
         doThrow(new IllegalArgumentException()).when(strings).clear();
-        assertThatThrownBy(() -> strings.clear()).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> strings.clear());
     }
     
     @Test
@@ -175,15 +178,17 @@ public class Stubbing {
                 // This call allows us to cancel the previous behavior
                 .doNothing()
                 .when(strings).clear();
-        assertThatThrownBy(() -> strings.clear()).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(() -> strings.clear());
         strings.clear();
     }
     
     @Test
     public void unnecessaryStubbing() {
+        // Note: after making the changes below, the whole class must be run, not only this test
         when(strings.get(5)).thenReturn("hello");
+        // Uncomment the following line to get a "Strict stubbing argument mismatch"
+        //strings.get(4);    
         // Comment the following line to see mockito's unnecessary stubbing detection in action 
-        // The whole class must be run, not only this test
-        strings.get(5);        
+        strings.get(5);    
     }
 }

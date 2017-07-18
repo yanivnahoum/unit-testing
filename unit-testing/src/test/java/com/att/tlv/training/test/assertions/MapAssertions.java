@@ -23,6 +23,7 @@ public class MapAssertions {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person alice = new Person(555, "Alice", 30, 1.65d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
+        // Map id -> Person
         Map<Long, Person> persons = Stream.of(jim, alice, carl)
                 .collect(toMap(Person::getId, Function.identity()));
 
@@ -47,13 +48,13 @@ public class MapAssertions {
         // Assertion on key
         assertThat(persons).containsKey(444L);
         assertThat(persons).containsKeys(444L, 555L);
-        assertThat(persons).containsValues(jim, alice);
         assertThat(persons).containsOnlyKeys(444L, 555L, 666L);
         assertThat(persons).doesNotContainKey(777L);
         assertThat(persons).doesNotContainKeys(777L, 888L);
 
         // Assertion on value
         assertThat(persons).containsValue(alice);
+        assertThat(persons).containsValues(jim, alice);
         assertThat(persons).doesNotContainValue(new Person(777, "Yaniv", 30, 1.65d));
 
         ImmutableMap<Integer, String> anotherMap = ImmutableMap.of(1, "one",
@@ -67,15 +68,14 @@ public class MapAssertions {
 
     @Test
     public void testMap_containsAllEntriesOf_example() {
-        ImmutableMap<Integer, String> map = ImmutableMap.of(1, "one",
+        ImmutableMap<Integer, String> bigMap = ImmutableMap.of(1, "one",
                 2, "two",
                 3, "three");
         
-        ImmutableMap<Integer, String> anotherMap = ImmutableMap.of(1, "one",
-                2, "two",
-                3, "three");        
+        ImmutableMap<Integer, String> smallMap = ImmutableMap.of(1, "one",
+                2, "two");        
 
-        assertThat(map).containsAllEntriesOf(anotherMap);
+        assertThat(bigMap).containsAllEntriesOf(smallMap);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class MapAssertions {
         // Order doesn't matter
         assertThat(persons).containsOnly(entry(555L, alice), entry(666L, carl), entry(444L, jim));
 
-        // Order matters - this MUST be a map that has predictable iteration order! 
+        // Order matters - this MUST be a map that has predictable iteration order! (i.e. NOT HashMap) 
         assertThat(persons).containsExactly(entry(444L, jim), entry(555L, alice), entry(666L, carl));
 
     }

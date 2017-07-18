@@ -1,6 +1,7 @@
 package com.att.tlv.training.test.answers.mocks;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.never;
@@ -20,7 +21,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.att.tlv.training.test.exercises.data.Person;
 import com.att.tlv.training.test.exercises.mocks.ComplexCollection;
 
-@RunWith(MockitoJUnitRunner.class)
+/**
+ * Unlike most collections, this collection does not expose methods for getting elements,
+ * only for adding or removing them. This was done intentionally so that the only way to test
+ * it would be via verifying mock behaviors.
+ * See {@link ComplexCollection}
+ */
+@RunWith(MockitoJUnitRunner.StrictStubs.class)
 public class ComplexCollectionTestAnswer {
     
     private static final Person ALICE = new Person(500, "Alice");
@@ -52,7 +59,7 @@ public class ComplexCollectionTestAnswer {
     
     @Test
     public void testAddNCopiesWithInvalidNumber() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> complexCollection.addNCopies(ALICE, -1))
+        assertThatIllegalArgumentException().isThrownBy(() -> complexCollection.addNCopies(ALICE, -1))
                 .withMessage("Number of copies must be greater than 0");
 
         verify(persons, never()).add(ALICE);

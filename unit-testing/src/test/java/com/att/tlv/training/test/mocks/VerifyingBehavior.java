@@ -68,7 +68,7 @@ public class VerifyingBehavior {
             // Do nothing
         }
 
-        // What we want is to verify the method was called twice!
+        // What we want is to verify the method was called 4 times!
         verify(numbers, times(4)).add(anyInt());
         // Or at least once
         verify(numbers, atLeastOnce()).add(1);
@@ -121,7 +121,7 @@ public class VerifyingBehavior {
         // We know this one too
         verify(numbers, never()).add(2);
 
-        // Verify that other mocks were not interacted
+        // Verify that other mocks were not interacted with
         verifyZeroInteractions(someOtherMock);
     }
     

@@ -50,7 +50,7 @@ public class LinkedHashMapTestAnswer {
     
     @Test
     public void testGetMissingEntry() {
-        Person alice = map.get(ALICE);
+        Person alice = map.get(400L);
         
         assertThat(alice).isNull();
     }

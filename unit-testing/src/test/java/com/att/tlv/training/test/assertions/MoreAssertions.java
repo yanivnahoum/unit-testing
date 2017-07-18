@@ -22,7 +22,9 @@ public class MoreAssertions {
         assertThat(0).isZero();
 
         // both ends inclusive
+        assertThat(10).isBetween(10, 30);
         assertThat(20).isBetween(10, 30);
+        assertThat(30).isBetween(10, 30);
     }
 
     @Test
@@ -52,11 +54,11 @@ public class MoreAssertions {
 
         assertThat(firstOfJanuary2000).isAfter("1999-12-31T23:59:59")
                 .isAfterOrEqualTo("1999-12-31T23:59:59")
-                .isAfterOrEqualTo("2000-01-01T00:00:00");
+                .isAfterOrEqualTo(firstOfJanuary2000);
 
         assertThat(firstOfJanuary2000).isBefore("2000-01-01T00:00:01")
                 .isBeforeOrEqualTo("2000-01-01T00:00:01")
-                .isBeforeOrEqualTo("2000-01-01T00:00:00");
+                .isBeforeOrEqualTo(firstOfJanuary2000);
 
         // successful assertions ignoring ...
         // ... nanoseconds
@@ -93,17 +95,17 @@ public class MoreAssertions {
 
         String someString = "something";
         assertThat(Optional.of(someString)).containsSame(someString);
-            
+
         // We'd like to call more than just contains("something"):
         assertThat(Optional.of(someString)).hasValueSatisfying(s -> {
             assertThat(s).isEqualTo("something");
             assertThat(s).startsWith("some");
             assertThat(s).endsWith("thing");
         });
-        
+
         // Specialized optionals
         OptionalInt optionalInt = OptionalInt.of(12);
         assertThat(optionalInt).isPresent()
-                            .hasValue(12);        
+                .hasValue(12);
     }
 }

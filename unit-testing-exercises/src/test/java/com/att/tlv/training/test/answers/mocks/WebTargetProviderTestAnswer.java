@@ -57,14 +57,6 @@ public class WebTargetProviderTestAnswer {
     }
     
     @Test
-    public void testGetWithInvalidURL() {
-        IllegalArgumentException ex = new IllegalArgumentException("This exception was intentionally thrown by a mock");
-        when(client.target(INVALID_URL)).thenThrow(ex);
-        
-        assertThatThrownBy(() -> webTargetProvider.get(INVALID_URL)).isSameAs(ex);
-    }
-    
-    @Test
     public void testGetWithNullURL() {
         NullPointerException ex = new NullPointerException("This exception was intentionally thrown by a mock");
         String url = null;

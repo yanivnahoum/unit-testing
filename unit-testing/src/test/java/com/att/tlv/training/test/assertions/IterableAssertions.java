@@ -5,6 +5,7 @@ import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -22,26 +23,17 @@ public class IterableAssertions {
         assertThat(animals).isNotEmpty()
                 .hasSize(3);
         assertThat(animals).hasSameSizeAs(newArrayList(1, 2, 3));
-        assertThat(animals).contains("cat")
+        assertThat(animals).contains("cat", "pig")
                 .doesNotContain("tiger");
-
-        // With containsOnly, all the elements must be present (but the order is not important)
-        assertThat(animals).containsOnly("dog", "cat", "pig")
-                .containsOnly("pig", "dog", "cat");
 
         assertThat(animals).doesNotContainNull()
                 .doesNotHaveDuplicates();
-
-        Iterable<String> duplicatedAnimals = newArrayList("dog", "cat", "pig", "dog", "cat", "pig");
-        assertThat(animals).containsOnlyElementsOf(duplicatedAnimals)
-                // Alias of containsOnlyElementsOf
-                .hasSameElementsAs(duplicatedAnimals);
 
         // Special check for null, empty collection or both
         assertThat(newArrayList("Hello", null, "World")).containsNull()
                 .isNotEmpty();
 
-        List<Object> newArrayList = newArrayList();
+        List<Object> newArrayList = new ArrayList<>();
         assertThat(newArrayList).doesNotContainNull()
                 .isEmpty();
         assertThat(newArrayList).isNullOrEmpty();
@@ -60,18 +52,34 @@ public class IterableAssertions {
                 // No order, all elements in the source iterable must be contained in the target
                 .isSubsetOf(6, 5, 4, 3, 2, 1, 0, -1)
                 // No order
-                .containsAll(newArrayList(6, 3, 1));
+                .containsAll(newArrayList(6, 3, 1))
+                .containsAll(newArrayList(6, 3, 1, 1, 1));
+    }
+    
+    @Test
+    public void test_containsOnly() {
+        Iterable<String> animals = newArrayList("dog", "cat", "pig");
+        Iterable<String> duplicatedAnimals = newArrayList("dog", "cat", "pig", "dog", "cat", "pig");
+        
+        // With containsOnly, all the distinct elements must be present (but the order is not important)
+        assertThat(duplicatedAnimals).containsOnly("dog", "cat", "pig")
+                .containsOnly("pig", "dog", "cat");
+        assertThat(animals).containsOnlyElementsOf(duplicatedAnimals)
+                // Alias of containsOnlyElementsOf
+                .hasSameElementsAs(duplicatedAnimals);        
     }
 
     @Test
     public void testIterable_containsExactly() {
         Iterable<String> animals = newArrayList("cat", "dog", "pig", "pig");
+        
+        // Same elements, same order (same size too, i.e. duplicates included)
         assertThat(animals).containsExactly("cat", "dog", "pig", "pig")
                 .containsOnly("pig", "cat", "dog")
                 // including duplicates, in any order
                 .containsExactlyInAnyOrder("pig", "pig", "cat", "dog");
 
-        // It works with collections that have a consistent iteration order (i.e. not HashSet)
+        // It works with collections that have a consistent iteration order (i.e. NOT HashSet)
         SortedSet<String> sortedAnimals = new TreeSet<>();
         sortedAnimals.add("cat");
         sortedAnimals.add("dog");
@@ -123,17 +131,17 @@ public class IterableAssertions {
                 .contains(oneTwoClone);
 
     }
-    
+
     @Test
     public void testIndexedAccess() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
-        
+
         // For lists, you can check element at a given index (we use Assertions.atIndex(int) syntactic sugar for better readability):
         List<Person> people = newArrayList(jim, carl);
         assertThat(people).contains(jim, atIndex(0))
                 .contains(carl, atIndex(1));
-        
+
         // And the same goes for arrays:
         Person[] peopleArray = { jim, carl };
         assertThat(peopleArray).contains(jim, atIndex(0))
