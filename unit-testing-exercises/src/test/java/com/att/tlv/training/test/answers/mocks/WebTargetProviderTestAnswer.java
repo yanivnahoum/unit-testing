@@ -21,7 +21,6 @@ import com.att.tlv.training.test.exercises.mocks.WebTargetProvider;
 public class WebTargetProviderTestAnswer {
     
     private static final String URL = "http://web.att.com/api/conferences";
-    private static final String INVALID_URL = "bla bla";
     private WebTargetProvider webTargetProvider;
     @Mock private Client client;
     @Mock private WebTarget webTarget;
