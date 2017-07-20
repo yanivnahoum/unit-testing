@@ -84,5 +84,7 @@ public class PointListTestAnswer {
         assertThat(copy).containsOnlyElementsOf(source);
         // or:
         assertThat(copy).hasSameElementsAs(source);
+        // or even better:
+        assertThat(copy).containsExactlyInAnyOrder(P1, P2, P3);
     }
 }

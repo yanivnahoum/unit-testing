@@ -36,7 +36,7 @@ public class LinkedHashMapTestAnswer {
         map.put(ALICE.getId(), ALICE);
         map.put(BOB.getId(), BOB);
         
-        assertThat(map).containsOnly(entry(ALICE.getId(), ALICE), entry(BOB.getId(), BOB));
+        assertThat(map).containsExactly(entry(ALICE.getId(), ALICE), entry(BOB.getId(), BOB));
     }
     
     @Test
@@ -90,6 +90,6 @@ public class LinkedHashMapTestAnswer {
         Person removed = map.remove(CARL.getId());
         
         assertThat(removed).isNull();
-        assertThat(map).containsOnly(entry(ALICE.getId(), ALICE), entry(BOB.getId(), BOB));
+        assertThat(map).containsExactly(entry(ALICE.getId(), ALICE), entry(BOB.getId(), BOB));
     }
 }

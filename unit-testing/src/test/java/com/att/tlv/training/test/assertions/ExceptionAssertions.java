@@ -106,11 +106,11 @@ public class ExceptionAssertions {
     
     @Test
     public void test_doesNotThrowAnyException() {
-        assertThatCode(this::doSomething).doesNotThrowAnyException();
+        assertThatCode(() -> doSomething("hello")).doesNotThrowAnyException();
     }
     
-    private void doSomething() {
-        // work
+    private int doSomething(String s) {
+        return s.length();
     }
 
     @Test
