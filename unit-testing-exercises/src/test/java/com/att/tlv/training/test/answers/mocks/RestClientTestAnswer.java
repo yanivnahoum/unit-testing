@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import javax.ws.rs.client.Invocation.Builder;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,7 +29,7 @@ public class RestClientTestAnswer {
     private static final Response OK_RESPONSE = Response.ok().build();
     private RestClient restClient;
     @Mock 
-    private WebTargetProvider webTargetProvider;
+    private Client client;
     @Mock(answer = Answers.RETURNS_SELF)
     private WebTarget webTarget;
     @Mock(answer = Answers.RETURNS_SELF)
@@ -37,8 +38,9 @@ public class RestClientTestAnswer {
 
     @Before
     public void setUp() {
+        WebTargetProvider webTargetProvider = new WebTargetProvider(client);
         restClient = new RestClient(webTargetProvider);
-        when(webTargetProvider.get(URL)).thenReturn(webTarget);
+        when(client.target(URL)).thenReturn(webTarget);
         when(webTarget.request()).thenReturn(builder);
         when(builder.get()).thenReturn(OK_RESPONSE);
     }
@@ -56,7 +58,7 @@ public class RestClientTestAnswer {
     @Test
     public void testGetFails() {
         RuntimeException ex = new RuntimeException("This exception was intentionally thrown by a mock");
-        when(webTargetProvider.get(URL)).thenThrow(ex);
+        when(client.target(URL)).thenThrow(ex);
         
         String path = "conferences";
         Response actualResponse = restClient.get(URL, path);
