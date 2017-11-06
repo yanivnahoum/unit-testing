@@ -9,10 +9,10 @@ public class JunitRules {
     
     // MUST be public and static!
     @ClassRule
-    public static TemporaryFolder TEMP_FOLDER = new TemporaryFolder();
+    public static final TemporaryFolder TEMP_FOLDER = new TemporaryFolder();
     // MUST be public!
     @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
+    public final TemporaryFolder tempFolder = new TemporaryFolder();
     
     @Test
     public void test1() {

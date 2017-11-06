@@ -15,9 +15,9 @@ import org.junit.rules.TestRule;
 public class JunitRulesTestAnswer {
     
     @ClassRule
-    public static TestRule before = new BeforeLoggingRule("Running set up before class...");
+    public static final TestRule BEFORE = new BeforeLoggingRule("Running set up before class...");
     @Rule
-    public TestRule after = new AfterLoggingRule("Running tear down after test...");
+    public final TestRule after = new AfterLoggingRule("Running tear down after test...");
     
     // Bonus: like @Before and @After methods, execution order of multiple rules is not predicatable.
     // Solution: RuleChain!

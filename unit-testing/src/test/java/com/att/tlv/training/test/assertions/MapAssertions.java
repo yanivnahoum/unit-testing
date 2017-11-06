@@ -67,7 +67,7 @@ public class MapAssertions {
     }
 
     @Test
-    public void testMap_containsAllEntriesOf_example() {
+    public void testMap_containsAllEntriesOf() {
         ImmutableMap<Integer, String> bigMap = ImmutableMap.of(1, "one",
                 2, "two",
                 3, "three");
@@ -100,7 +100,7 @@ public class MapAssertions {
     }    
 
     private static <K, V> Map.Entry<K, V> javaMapEntry(K key, V value) {
-        return new SimpleImmutableEntry<K, V>(key, value);
+        return new SimpleImmutableEntry<>(key, value);
     }
 }
 

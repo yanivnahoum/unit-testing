@@ -2,7 +2,6 @@ package com.att.tlv.training.test.assertions;
 
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,28 +26,6 @@ public class BasicAssertions {
         // isEqualTo takes an object (just like Object.equals())
         Object johnAsObject = john;
         assertThat(john).isEqualTo(johnAsObject);
-    }
-
-    @Test
-    public void test_assertionMessages() {
-        try {
-            // You can specify a test description with as() method or describedAs(), it supports String format args
-            assertThat(john.getAge()).as("check %s's age", john.getName())
-                    .isEqualTo(55);
-        }
-        catch (AssertionError e) {
-            assertThat(e).hasMessage("[check John's age] expected:<[55]> but was:<[30]>");
-        }
-
-        try {
-            int age = john.getAge();
-            // You can even specify your own error message
-            assertThat(age).overridingErrorMessage("Expected %s's age to be 55, but it was %d instead!", john.getName(), age)
-                    .isEqualTo(55);
-        }
-        catch (AssertionError e) {
-            assertThat(e).hasMessage("Expected John's age to be 55, but it was 30 instead!");
-        }
     }
 
     @Test
@@ -124,4 +101,26 @@ public class BasicAssertions {
         // If we just want to go over all fields / properties:
         assertThat(oneTwo).isEqualToComparingFieldByField(oneTwoClone);
     }
+    
+    @Test
+    public void test_assertionMessages() {
+        try {
+            // You can specify a test description with as() method or describedAs(), it supports String format args
+            assertThat(john.getAge()).as("check %s's age", john.getName())
+                    .isEqualTo(55);
+        }
+        catch (AssertionError e) {
+            assertThat(e).hasMessage("[check John's age] expected:<[55]> but was:<[30]>");
+        }
+
+        try {
+            int age = john.getAge();
+            // You can even specify your own error message
+            assertThat(age).overridingErrorMessage("Expected %s's age to be 55, but it was %d instead!", john.getName(), age)
+                    .isEqualTo(55);
+        }
+        catch (AssertionError e) {
+            assertThat(e).hasMessage("Expected John's age to be 55, but it was 30 instead!");
+        }
+    }    
 }

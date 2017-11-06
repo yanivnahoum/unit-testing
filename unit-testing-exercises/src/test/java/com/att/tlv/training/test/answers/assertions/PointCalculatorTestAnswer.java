@@ -37,7 +37,7 @@ public class PointCalculatorTestAnswer {
     }
     
     @Test
-    public void testAddPointAndOrigin() {
+    public void add_pointAndOrigin_shouldReturnPoint() {
         Point a = new Point(1, 2);
         Point origin = new Point(0, 0);
         
@@ -47,7 +47,7 @@ public class PointCalculatorTestAnswer {
     }
     
     @Test
-    public void testAddOriginAndPoint() {
+    public void add_originAndPoint_shouldReturnPoint() {
         Point a = new Point(1, 2);
         Point origin = new Point(0, 0);
         

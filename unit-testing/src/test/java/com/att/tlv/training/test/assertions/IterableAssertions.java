@@ -61,7 +61,7 @@ public class IterableAssertions {
         Iterable<String> animals = newArrayList("dog", "cat", "pig");
         Iterable<String> duplicatedAnimals = newArrayList("dog", "cat", "pig", "dog", "cat", "pig");
         
-        // With containsOnly, all the distinct elements must be present (but the order is not important)
+        // With containsOnly, all the distinct elements must be present, and nothing else (but the order is not important)
         assertThat(duplicatedAnimals).containsOnly("dog", "cat", "pig")
                 .containsOnly("pig", "dog", "cat");
         assertThat(animals).containsOnlyElementsOf(duplicatedAnimals)
@@ -73,7 +73,7 @@ public class IterableAssertions {
     public void testIterable_containsExactly() {
         Iterable<String> animals = newArrayList("cat", "dog", "pig", "pig");
         
-        // Same elements, same order (same size too, i.e. duplicates included)
+        // Same elements, same order (same size too, i.e. duplicates included), and nothing else
         assertThat(animals).containsExactly("cat", "dog", "pig", "pig")
                 .containsOnly("pig", "cat", "dog")
                 // including duplicates, in any order
