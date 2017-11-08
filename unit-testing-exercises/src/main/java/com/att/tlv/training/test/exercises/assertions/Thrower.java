@@ -1,7 +1,11 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-public class Thrower {
+public final class Thrower {
     
+    private Thrower() {
+       // no instances allowed
+    }
+
     /**
      * Returns the sum of its arguments,
      * throwing an exception if the result overflows an {@code int}.

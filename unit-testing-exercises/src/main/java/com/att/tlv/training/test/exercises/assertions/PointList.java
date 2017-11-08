@@ -6,7 +6,11 @@ import java.util.List;
 import com.att.tlv.training.test.exercises.data.Point;
 import com.google.common.collect.ImmutableList;
 
-public abstract class PointList {
+public final class PointList {
+    
+    private PointList() {
+        // No instances allowed
+    }
 
     /**
      *  Returns an empty immutable list.

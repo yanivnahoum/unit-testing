@@ -46,7 +46,7 @@ public class PointListTestAnswer {
     public void testOfWithSinglePointCoordinates() {
         List<Point> list = PointList.of(P1.getX(), P1.getY());
         assertThat(list).usingFieldByFieldElementComparator()
-                .containsOnly(P1);
+                .containsExactly(P1);
     }
 
     @Test
