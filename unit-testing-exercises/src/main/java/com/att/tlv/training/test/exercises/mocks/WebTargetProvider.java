@@ -25,10 +25,6 @@ public class WebTargetProvider {
      * @throws NullPointerException     in case the supplied argument is {@code null}.
      */
     public WebTarget get(String url) {
-        return targets.computeIfAbsent(url, this::create);
-    }
-    
-    private WebTarget create(String url) {
-        return client.target(url);
+        return targets.computeIfAbsent(url, client::target);
     }
 }

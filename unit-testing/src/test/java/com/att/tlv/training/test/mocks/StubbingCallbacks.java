@@ -35,6 +35,7 @@ public class StubbingCallbacks {
         // or much simpler, use AdditionalAnswers.answer()
         when(strings.add(anyString())).then(answer(this::logAdd));  
         assertThat(strings.add("Hey there!")).isTrue();
+        assertThat(strings.add("Hey!")).isFalse();
         
         // Note that the answer accepts an Answer1/VoidAnswer1, Answer2/VoidAnswer2, ..., Answer5/VoidAnswer5
         // But the compiler has no way of inferring the input parameters, so they have to be explicitly typed:
@@ -45,7 +46,7 @@ public class StubbingCallbacks {
     
     private boolean logAdd(String element) {
         System.out.printf("adding [%s]%n", element);
-        return true;
+        return element.length() > 5;
     }
     
     @Test
@@ -57,7 +58,7 @@ public class StubbingCallbacks {
         strings.clear();
     }
     
-    private Object logClear() {
+    private Void logClear() {
         System.out.println("Clearing list");
         return null;
     }
