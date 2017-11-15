@@ -76,7 +76,7 @@ public class Stubbing {
         
         // More complex ones argument matchers
         when(strings.get(intThat(i -> i % 2 == 0))).thenReturn("Even");
-        when(strings.get(intThat(i -> i % 2 == 1))).thenReturn("Odd");
+        when(strings.get(intThat(i -> i % 2 != 0))).thenReturn("Odd");
         String value1 = strings.get(20);        
         assertThat(value1).isEqualTo("Even");
         String value2 = strings.get(21);        

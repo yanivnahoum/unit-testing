@@ -69,8 +69,7 @@ public class ComplexCollectionTestAnswer {
         verify(idToPerson, never()).put(anyLong(), any());
         
         // Or
-        verifyZeroInteractions(persons);
-        verifyZeroInteractions(idToPerson);
+        verifyZeroInteractions(persons, idToPerson);
     }
     
     @Test
