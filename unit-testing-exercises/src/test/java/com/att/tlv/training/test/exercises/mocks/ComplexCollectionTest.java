@@ -1,5 +1,8 @@
 package com.att.tlv.training.test.exercises.mocks;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,17 +28,17 @@ public class ComplexCollectionTest {
     
     @Test
     public void testAdd() {
-        // TODO test ComplexCollection.testAdd()
+        // TODO test ComplexCollection.add()
     }
     
     @Test
     public void testAddNCopies() {
-        // TODO test ComplexCollection.testAddNCopies()
+        // TODO test ComplexCollection.addNCopies()
     }
     
     @Test
     public void testAddNCopiesWithInvalidNumber() {
-        // TODO test ComplexCollection.testAddNCopies() specifying an invalid number of copies
+        // TODO test ComplexCollection.addNCopies() specifying an invalid number of copies
     }
     
     @Test
