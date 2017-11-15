@@ -1,6 +1,7 @@
 package com.att.tlv.training.test.mocks;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -178,7 +179,7 @@ public class Stubbing {
                 .doNothing()
                 .when(strings).clear();
         assertThatIllegalArgumentException().isThrownBy(() -> strings.clear());
-        strings.clear();
+        assertThatCode(strings::clear).doesNotThrowAnyException();
     }
     
     @Test
