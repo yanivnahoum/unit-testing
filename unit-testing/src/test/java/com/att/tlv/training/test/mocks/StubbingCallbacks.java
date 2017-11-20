@@ -4,13 +4,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.AdditionalAnswers.answer;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
@@ -61,5 +65,28 @@ public class StubbingCallbacks {
     private Void logClear() {
         System.out.println("Clearing list");
         return null;
+    }
+    
+    @Test
+    public void testMockitoWithWildcards() {
+        DummyClass dummyClass = mock(DummyClass.class);
+        List<? extends Number> someList = new ArrayList<Integer>();
+        //when(dummyClass.dummyMethod()).thenReturn(someList); //Compiler complains about this
+        
+        // Solve by using explicit type argument specification
+        Mockito.<List<? extends Number>>when(dummyClass.dummyMethod()).thenReturn(someList);
+        assertThat(dummyClass.dummyMethod()).isSameAs(someList);
+        // Or thenAnswer
+        when(dummyClass.dummyMethod()).thenAnswer(invocation -> someList); 
+        assertThat(dummyClass.dummyMethod()).isSameAs(someList);
+        // Or doReturn()
+        doReturn(someList).when(dummyClass).dummyMethod();        
+        assertThat(dummyClass.dummyMethod()).isSameAs(someList);
+    }
+}
+
+class DummyClass {
+    public List<? extends Number> dummyMethod() {
+        return new ArrayList<Integer>();
     }
 }
