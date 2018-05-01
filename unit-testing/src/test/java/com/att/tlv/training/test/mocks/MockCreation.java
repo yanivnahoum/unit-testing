@@ -1,13 +1,14 @@
 package com.att.tlv.training.test.mocks;
 
-import static org.mockito.Mockito.mock;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
-import org.junit.Test;
+import static org.mockito.Mockito.mock;
 
 public class MockCreation {
     
@@ -24,7 +25,8 @@ public class MockCreation {
         // We can mock generic concrete classes as well
         ArrayList<?> arrayList = mock(ArrayList.class);   
     }
-    
+
+    @Ignore
     @SuppressWarnings("unused")
     @Test
     public void cannotCreate() {
