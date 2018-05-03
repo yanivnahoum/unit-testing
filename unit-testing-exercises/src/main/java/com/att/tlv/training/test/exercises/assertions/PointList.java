@@ -1,10 +1,10 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.att.tlv.training.test.exercises.data.Point;
 import com.google.common.collect.ImmutableList;
+
+import java.util.Collection;
+import java.util.List;
 
 public final class PointList {
     

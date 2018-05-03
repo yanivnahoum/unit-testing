@@ -1,13 +1,13 @@
 package com.att.tlv.training.test.assertions;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.OptionalInt;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoreAssertions {
 

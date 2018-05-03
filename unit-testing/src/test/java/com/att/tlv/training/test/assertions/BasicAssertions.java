@@ -1,16 +1,15 @@
 package com.att.tlv.training.test.assertions;
 
-import static java.util.Comparator.comparingInt;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.att.tlv.training.test.data.Person;
+import com.att.tlv.training.test.data.Point;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.junit.Test;
-
-import com.att.tlv.training.test.data.Person;
-import com.att.tlv.training.test.data.Point;
+import static java.util.Comparator.comparingInt;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BasicAssertions {
 

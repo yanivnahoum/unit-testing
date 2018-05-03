@@ -1,12 +1,12 @@
 package com.att.tlv.training.test.exercises.mocks;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class ComplexCollection<K, V> {
     

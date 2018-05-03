@@ -1,17 +1,17 @@
 package com.att.tlv.training.test.assertions;
 
+import org.assertj.core.api.Condition;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.List;
+
 import static com.google.common.collect.Lists.newArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIOException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.io.IOException;
-import java.util.List;
-
-import org.assertj.core.api.Condition;
-import org.junit.Test;
 
 public class ExceptionAssertions {
 

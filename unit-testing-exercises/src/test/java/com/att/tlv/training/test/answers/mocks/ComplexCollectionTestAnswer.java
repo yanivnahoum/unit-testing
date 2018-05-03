@@ -1,5 +1,16 @@
 package com.att.tlv.training.test.answers.mocks;
 
+import com.att.tlv.training.test.exercises.data.Person;
+import com.att.tlv.training.test.exercises.mocks.ComplexCollection;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.List;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -7,18 +18,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
-
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import com.att.tlv.training.test.exercises.data.Person;
-import com.att.tlv.training.test.exercises.mocks.ComplexCollection;
 
 /**
  * Unlike most collections, this collection does not expose methods for getting elements,

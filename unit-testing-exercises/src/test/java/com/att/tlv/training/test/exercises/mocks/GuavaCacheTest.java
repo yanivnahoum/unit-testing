@@ -1,12 +1,11 @@
 package com.att.tlv.training.test.exercises.mocks;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 /**

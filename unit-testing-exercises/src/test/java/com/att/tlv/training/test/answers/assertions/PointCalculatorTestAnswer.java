@@ -1,12 +1,11 @@
 package com.att.tlv.training.test.answers.assertions;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import com.att.tlv.training.test.exercises.assertions.PointCalculator;
+import com.att.tlv.training.test.exercises.data.Point;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.att.tlv.training.test.exercises.assertions.PointCalculator;
-import com.att.tlv.training.test.exercises.data.Point;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PointCalculatorTestAnswer {
     

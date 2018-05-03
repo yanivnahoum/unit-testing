@@ -1,12 +1,11 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import com.att.tlv.training.test.exercises.data.Person;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.att.tlv.training.test.exercises.data.Person;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class LinkedHashMapTest {
     

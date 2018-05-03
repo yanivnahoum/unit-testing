@@ -1,8 +1,7 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-import org.junit.Test;
-
 import com.att.tlv.training.test.exercises.data.Point;
+import org.junit.Test;
 
 /**
  * Go over all the public methods of {@link PointList}.

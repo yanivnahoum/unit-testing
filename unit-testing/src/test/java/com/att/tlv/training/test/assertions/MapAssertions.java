@@ -1,8 +1,8 @@
 package com.att.tlv.training.test.assertions;
 
-import static java.util.stream.Collectors.toMap;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import com.att.tlv.training.test.data.Person;
+import com.google.common.collect.ImmutableMap;
+import org.junit.Test;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.LinkedHashMap;
@@ -11,10 +11,9 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.junit.Test;
-
-import com.att.tlv.training.test.data.Person;
-import com.google.common.collect.ImmutableMap;
+import static java.util.stream.Collectors.toMap;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 public class MapAssertions {
 

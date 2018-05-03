@@ -1,12 +1,8 @@
 package com.att.tlv.training.test.exercises.mocks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import com.att.tlv.training.test.exercises.data.Person;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.att.tlv.training.test.exercises.data.Person;
 
 /**
  * Unlike most collections, this collection does not expose methods for getting elements,

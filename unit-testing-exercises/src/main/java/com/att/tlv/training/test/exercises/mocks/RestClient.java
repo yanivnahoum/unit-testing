@@ -1,9 +1,8 @@
 package com.att.tlv.training.test.exercises.mocks;
 
-import java.util.Objects;
-
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Objects;
 
 public class RestClient {
 

@@ -1,19 +1,18 @@
 package com.att.tlv.training.test.assertions;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Comparator.comparingInt;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.atIndex;
+import com.att.tlv.training.test.data.Person;
+import com.att.tlv.training.test.data.Point;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.junit.Test;
-
-import com.att.tlv.training.test.data.Person;
-import com.att.tlv.training.test.data.Point;
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Comparator.comparingInt;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.atIndex;
 
 public class IterableAssertions {
 

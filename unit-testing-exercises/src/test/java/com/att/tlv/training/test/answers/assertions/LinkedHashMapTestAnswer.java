@@ -1,18 +1,17 @@
 package com.att.tlv.training.test.answers.assertions;
 
-import static java.util.stream.Collectors.toMap;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import com.att.tlv.training.test.exercises.data.Person;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import com.att.tlv.training.test.exercises.data.Person;
+import static java.util.stream.Collectors.toMap;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 public class LinkedHashMapTestAnswer {
     

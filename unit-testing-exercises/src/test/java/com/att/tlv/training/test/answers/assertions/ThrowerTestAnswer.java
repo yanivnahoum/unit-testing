@@ -1,11 +1,10 @@
 package com.att.tlv.training.test.answers.assertions;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+import com.att.tlv.training.test.exercises.assertions.Thrower;
 import org.junit.Test;
 
-import com.att.tlv.training.test.exercises.assertions.Thrower;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ThrowerTestAnswer {
     

@@ -1,16 +1,15 @@
 package com.att.tlv.training.test.answers.assertions;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.att.tlv.training.test.exercises.assertions.PointList;
+import com.att.tlv.training.test.exercises.data.Point;
+import org.junit.Test;
 
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Test;
-
-import com.att.tlv.training.test.exercises.assertions.PointList;
-import com.att.tlv.training.test.exercises.data.Point;
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PointListTestAnswer {
 
