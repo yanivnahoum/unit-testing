@@ -80,8 +80,8 @@ public class IterableAssertions {
 
         // It works with collections that have a consistent iteration order (i.e. NOT HashSet)
         SortedSet<String> sortedAnimals = new TreeSet<>();
-        sortedAnimals.add("cat");
         sortedAnimals.add("dog");
+        sortedAnimals.add("cat");
         sortedAnimals.add("pig");
         assertThat(sortedAnimals).containsExactly("cat", "dog", "pig");
 

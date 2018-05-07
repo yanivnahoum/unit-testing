@@ -31,7 +31,7 @@ public class GuavaCacheTest {
 
     @Test
     public void testInvalidateKey() {
-        // Test cache.invalidate(key) with a valid key, BEFORE it expires:
+        // Test cache.invalidate(key) with a valid key, before it expires:
         int key = 10;
         int value = 100;
         
@@ -52,7 +52,7 @@ public class GuavaCacheTest {
     
     @Test
     public void testReplaceKey() {
-        // Test replacing a key by putting it again in the cache BEFORE it expires.
+        // Test replacing a key by putting it again in the cache before it expires.
         
         int key = 10;
         int value1 = 100;

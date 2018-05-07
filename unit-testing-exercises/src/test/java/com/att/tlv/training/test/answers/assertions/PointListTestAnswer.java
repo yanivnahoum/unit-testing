@@ -24,7 +24,7 @@ public class PointListTestAnswer {
     }
 
     @Test
-    public void testOfWithSingleArguments() {
+    public void testOfWithSingleArgument() {
         List<Point> list = PointList.of(P1);
         assertThat(list).containsExactly(P1);
     }

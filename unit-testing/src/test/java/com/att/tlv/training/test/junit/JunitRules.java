@@ -9,20 +9,20 @@ public class JunitRules {
     
     // MUST be public and static!
     @ClassRule
-    public static final TemporaryFolder TEMP_FOLDER = new TemporaryFolder();
+    public static final TemporaryFolder tempFolderPerClass = new TemporaryFolder();
     // MUST be public!
     @Rule
     public final TemporaryFolder tempFolder = new TemporaryFolder();
     
     @Test
     public void test1() {
-        System.out.println("Class Rule: " + TEMP_FOLDER.getRoot());
+        System.out.println("Class Rule: " + tempFolderPerClass.getRoot());
         System.out.println("Test Rule: " + tempFolder.getRoot());
     }
     
     @Test
     public void test2() {
-        System.out.println("Class Rule: " + TEMP_FOLDER.getRoot());
+        System.out.println("Class Rule: " + tempFolderPerClass.getRoot());
         System.out.println("Test Rule: " + tempFolder.getRoot());
     }
 }
