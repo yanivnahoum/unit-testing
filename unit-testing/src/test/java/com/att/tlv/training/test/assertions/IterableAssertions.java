@@ -146,4 +146,24 @@ public class IterableAssertions {
         assertThat(peopleArray).contains(jim, atIndex(0))
                 .contains(carl, atIndex(1));
     }
+
+    @Test
+    public void testWithPredicate() {
+        Person jim = new Person(444, "Jim", 30, 1.85d);
+        Person carl = new Person(666, "Carl", 20, 1.95d);
+
+        // For lists, you can check element at a given index (we use Assertions.atIndex(int) syntactic sugar for better readability):
+        List<Person> people = newArrayList(jim, carl);
+
+        assertThat(people).allMatch(p -> p.getAge() > 18);
+        assertThat(people).anyMatch(p -> p.getId() == 666);
+        assertThat(people).noneMatch(p -> p.getAge() < 18);
+
+        assertThat(people).satisfies(ppl -> {
+            assertThat(ppl).allMatch(p -> p.getAge() > 18);
+            assertThat(ppl).anyMatch(p -> p.getId() == 666);
+        });
+
+        assertThat(people).satisfies(p -> assertThat(p.getAge()).isEqualTo(20), atIndex(1));
+    }
 }
