@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
+import static org.assertj.core.groups.Tuple.tuple;
 
 public class IterableAssertions {
 
@@ -114,6 +115,9 @@ public class IterableAssertions {
         // Sort of like Stream::map
         assertThat(people).extracting(Person::getAge)
                 .containsOnly(20, 30);
+
+        assertThat(people).extracting(Person::getAge, Person::getName)
+                .containsExactlyInAnyOrder(tuple(20, "Carl"), tuple(30, "Jim"));
     }
 
     @Test
@@ -145,14 +149,13 @@ public class IterableAssertions {
         Person[] peopleArray = { jim, carl };
         assertThat(peopleArray).contains(jim, atIndex(0))
                 .contains(carl, atIndex(1));
+
     }
 
     @Test
     public void testWithPredicate() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
-
-        // For lists, you can check element at a given index (we use Assertions.atIndex(int) syntactic sugar for better readability):
         List<Person> people = newArrayList(jim, carl);
 
         assertThat(people).allMatch(p -> p.getAge() > 18);
