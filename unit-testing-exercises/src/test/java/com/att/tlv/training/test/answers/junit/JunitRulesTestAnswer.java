@@ -22,8 +22,8 @@ public class JunitRulesTestAnswer {
     // Bonus: like @Before and @After methods, execution order of multiple rules is not predictable.
     // Solution: RuleChain!
     @Rule
-    public TestRule chain = RuleChain.outerRule(new BeforeLoggingRule(">>>>> Running set up before test #1..."))
-            .around(new BeforeLoggingRule(">>>>> Running set up before test #2..."));
+    public TestRule chain = RuleChain.outerRule(new BeforeLoggingRule(">>>>> Running set up #1 before test..."))
+                                     .around(new BeforeLoggingRule(">>>>> Running set up #2 before test..."));
 
     @Test
     public void test1() {

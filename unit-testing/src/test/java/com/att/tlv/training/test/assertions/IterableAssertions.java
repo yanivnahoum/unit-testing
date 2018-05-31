@@ -162,11 +162,6 @@ public class IterableAssertions {
         assertThat(people).anyMatch(p -> p.getId() == 666);
         assertThat(people).noneMatch(p -> p.getAge() < 18);
 
-        assertThat(people).satisfies(ppl -> {
-            assertThat(ppl).allMatch(p -> p.getAge() > 18);
-            assertThat(ppl).anyMatch(p -> p.getId() == 666);
-        });
-
         assertThat(people).satisfies(p -> assertThat(p.getAge()).isEqualTo(20), atIndex(1));
     }
 }

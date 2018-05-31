@@ -80,10 +80,14 @@ public class PointListTestAnswer {
         Set<Point> source = newHashSet(P1, P2, P3);
         List<Point> copy = PointList.copyOf(source);
         // HashSet iteration order is not predicatble.
-        assertThat(copy).containsOnlyElementsOf(source);
+        assertThat(copy).containsOnlyElementsOf(source)
+                        .hasSameSizeAs(source);
         // or:
-        assertThat(copy).hasSameElementsAs(source);
+        assertThat(copy).hasSameElementsAs(source)
+                        .hasSameSizeAs(source);
         // or even better:
         assertThat(copy).containsExactlyInAnyOrder(P1, P2, P3);
+        // or this:
+        assertThat(copy).containsExactlyInAnyOrderElementsOf(source);
     }
 }

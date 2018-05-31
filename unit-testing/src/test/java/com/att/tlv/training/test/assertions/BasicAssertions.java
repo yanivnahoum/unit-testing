@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -100,7 +101,21 @@ public class BasicAssertions {
         // If we just want to go over all fields / properties:
         assertThat(oneTwo).isEqualToComparingFieldByField(oneTwoClone);
     }
-    
+
+    @Test
+    public void test_satisfies() {
+        Person jim = new Person(444, "Jim", 30, 1.85d);
+        Person alice = new Person(555, "Alice", 25, 1.65d);
+
+        Consumer<Person> requirements = p -> {
+            assertThat(p.getAge()).isBetween(20, 30);
+            assertThat(p.getName()).contains("i");
+        };
+
+        assertThat(jim).satisfies(requirements);
+        assertThat(alice).satisfies(requirements);
+    }
+
     @Test
     public void test_assertionMessages() {
         try {
