@@ -116,7 +116,7 @@ public class DefaultReturnValues {
     private Demo fluentDemo;
     @Test
     public void assertThatMockedTypeReturnsItself() {
-        assertThat(fluentDemo.getMe()).isEqualTo(fluentDemo);
+        assertThat(fluentDemo.getMe()).isSameAs(fluentDemo);
     }
     
     @Mock
