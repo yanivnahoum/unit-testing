@@ -9,14 +9,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ThrowerTestAnswer {
     
     @Test
-    public void testAddExactOverflow() {
+    public void addExactWithOverflow_shouldThrowException() {
         assertThatThrownBy(() -> Thrower.addExact(Integer.MAX_VALUE, 1))
                 .isExactlyInstanceOf(ArithmeticException.class)
                 .hasNoCause();
     }
     
     @Test
-    public void testThrowNestedException() {
+    public void throwNestedException_shouldThrowExceptionWithCorrectMessageAndCause() {
         assertThatThrownBy(Thrower::throwNestedException)
             .isExactlyInstanceOf(RuntimeException.class)
             .hasMessage("Argument is not valid!")

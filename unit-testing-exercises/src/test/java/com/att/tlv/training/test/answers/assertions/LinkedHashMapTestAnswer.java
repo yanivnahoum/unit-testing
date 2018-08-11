@@ -31,7 +31,7 @@ public class LinkedHashMapTestAnswer {
     }
     
     @Test
-    public void testPutTwoEntries() {
+    public void whenPuttingTwoEntries_shouldContainExactlyTheEntries() {
         map.put(ALICE.getId(), ALICE);
         map.put(BOB.getId(), BOB);
         
@@ -39,7 +39,7 @@ public class LinkedHashMapTestAnswer {
     }
     
     @Test
-    public void testGetExistingEntry() {
+    public void getExistingId_shouldReturnPerson() {
         map.put(ALICE.getId(), ALICE);
         
         Person alice = map.get(ALICE.getId());
@@ -48,14 +48,14 @@ public class LinkedHashMapTestAnswer {
     }
     
     @Test
-    public void testGetMissingEntry() {
+    public void getMissingId_shouldReturnNull() {
         Person person = map.get(400L);
         
         assertThat(person).isNull();
     }
     
     @Test
-    public void testConstructorWithMap() {
+    public void constructorWithMap_shouldCopyEntries() {
         Map<Long, Person> source = Stream.of(ALICE, BOB, CARL)
                 .collect(toMap(Person::getId, Function.identity()));
         
@@ -70,7 +70,7 @@ public class LinkedHashMapTestAnswer {
     }
     
     @Test
-    public void testRemoveOneOfTwoEntries() {
+    public void removeOneOfTwoIds_shouldReturnCorrectPerson_andLeaveOtherInMap() {
         map.put(ALICE.getId(), ALICE);
         map.put(BOB.getId(), BOB);
         
@@ -82,7 +82,7 @@ public class LinkedHashMapTestAnswer {
     }
     
     @Test
-    public void testRemoveMissingEntry() {
+    public void removeMissingId_shouldReturnNull_andLeaveMapIntact() {
         map.put(ALICE.getId(), ALICE);
         map.put(BOB.getId(), BOB);
         

@@ -17,7 +17,7 @@ public class PointCalculatorTestAnswer {
     }
 
     @Test
-    public void testAdd() {
+    public void add_nonOriginPoints_shouldReturnSum() {
         int aX = 0, aY = 2;
         int bX = 3, bY = 0;
         Point a = new Point(aX, aY);

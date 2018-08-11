@@ -18,45 +18,45 @@ public class PointListTestAnswer {
     private static final Point P3 = new Point(5, 6);
 
     @Test
-    public void testEmpty() {
+    public void empty_shouldReturnEmptyList() {
         List<Point> list = PointList.empty();
         assertThat(list).isEmpty();
     }
 
     @Test
-    public void testOfWithSingleArgument() {
+    public void of_withSinglePoint_shouldReturnListOfPoint() {
         List<Point> list = PointList.of(P1);
         assertThat(list).containsExactly(P1);
     }
 
     @Test
-    public void testOfWithTwoArguments() {
+    public void of_withTwoPoints_shouldReturnListOfOrderedPoints() {
         List<Point> list = PointList.of(P1, P2);
         assertThat(list).containsExactly(P1, P2);
     }
 
     @Test
-    public void testOfWithThreeArguments() {
+    public void of_withThreePoints_shouldReturnListOfOrderedPoints() {
         List<Point> list = PointList.of(P1, P2, P3);
         assertThat(list).containsExactly(P1, P2, P3);
     }
 
     @Test
-    public void testOfWithSinglePointCoordinates() {
+    public void of_withSinglePointCoordinates_shouldReturnListOfPoint() {
         List<Point> list = PointList.of(P1.getX(), P1.getY());
         assertThat(list).usingFieldByFieldElementComparator()
                 .containsExactly(P1);
     }
 
     @Test
-    public void testOfWithTwoPointCoordinates() {
+    public void of_withTwoPointCoordinates_shouldReturnListOfPoints() {
         List<Point> list = PointList.of(P1.getX(), P1.getY(), P2.getX(), P2.getY());
         assertThat(list).usingFieldByFieldElementComparator()
                 .containsExactly(P1, P2);
     }
 
     @Test
-    public void testOfWithThreePointCoordinates() {
+    public void of_withThreePointCoordinates_shouldReturnListOfPoints() {
         List<Point> list = PointList.of(P1.getX(), P1.getY(), P2.getX(), P2.getY(), P3.getX(), P3.getY());
         assertThat(list).usingFieldByFieldElementComparator()
                 .containsExactly(P1, P2, P3);
@@ -69,14 +69,14 @@ public class PointListTestAnswer {
     }
 
     @Test
-    public void testCopyOfList() {
+    public void copyOfList_shouldReturnNewIdenticalList() {
         List<Point> source = newArrayList(P1, P2, P3);
         List<Point> copy = PointList.copyOf(source);
         assertThat(copy).containsExactlyElementsOf(source);
     }
 
     @Test
-    public void testCopyOfHashSet() {
+    public void copyOfHashSet_shouldReturnNewListWithDifferentOrder() {
         Set<Point> source = newHashSet(P1, P2, P3);
         List<Point> copy = PointList.copyOf(source);
         // HashSet iteration order is not predicatble.

@@ -45,7 +45,7 @@ public class RestClientTestAnswer {
     }
 
     @Test
-    public void testGet() {
+    public void get_shouldCallSetRequestPath_andHeader_andReturnOkResponse() {
         String path = "conferences";
         Response actualResponse = restClient.get(URL, path);
         
@@ -55,7 +55,7 @@ public class RestClientTestAnswer {
     }
     
     @Test
-    public void testGetFails() {
+    public void whenClientThrowsException_get_shouldReturnInternalServerErrorResponse() {
         RuntimeException ex = new RuntimeException("This exception was intentionally thrown by a mock");
         when(client.target(URL)).thenThrow(ex);
         

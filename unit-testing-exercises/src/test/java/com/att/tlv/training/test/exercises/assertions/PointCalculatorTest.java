@@ -21,7 +21,7 @@ public class PointCalculatorTest {
      * Make sure PointCalculator::add returns the expected result for non-origin Points.
      */
     @Test
-    public void testAdd() {
+    public void add_nonOriginPoints_shouldReturnSum() {
         // TODO test PointCalculator.add.
     }
     

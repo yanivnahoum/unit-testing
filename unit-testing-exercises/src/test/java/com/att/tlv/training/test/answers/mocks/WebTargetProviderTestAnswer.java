@@ -32,7 +32,7 @@ public class WebTargetProviderTestAnswer {
     }
 
     @Test
-    public void testGetNew() {
+    public void getWithNewUrl_shouldReturnWebTargetFromClient() {
         when(client.target(URL)).thenReturn(webTarget);
         
         WebTarget actualTarget = webTargetProvider.get(URL);
@@ -44,7 +44,7 @@ public class WebTargetProviderTestAnswer {
     }
     
     @Test
-    public void testGetExisting() {
+    public void getWithExistingUrl_shouldReturnCachedWebTarget() {
         when(client.target(URL)).thenReturn(webTarget);
         
         webTargetProvider.get(URL);
@@ -57,7 +57,7 @@ public class WebTargetProviderTestAnswer {
     }
     
     @Test
-    public void testGetWithNullURL() {
+    public void getWithNullUrl_shouldThrowNullPointerException() {
         NullPointerException ex = new NullPointerException("This exception was intentionally thrown by a mock");
         String url = null;
         when(client.target(url)).thenThrow(ex);

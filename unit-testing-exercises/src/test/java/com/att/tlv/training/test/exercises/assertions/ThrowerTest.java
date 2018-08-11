@@ -5,12 +5,12 @@ import org.junit.Test;
 public class ThrowerTest {
     
     @Test
-    public void testAddExactOverflow() {
+    public void addExactWithOverflow_shouldThrowException() {
         // TODO test Thrower.addExact. Be specific in your assertions.
     }
     
     @Test
-    public void testThrowNestedException() {
+    public void throwNestedException_shouldThrowExceptionWithCorrectMessageAndCause() {
         // TODO test Thrower.throwNestedException. Be specific in your assertions.
     }
 }

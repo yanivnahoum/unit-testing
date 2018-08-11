@@ -14,37 +14,37 @@ public class PointListTest {
     private static final Point P3 = new Point(5, 6);
     
     @Test
-    public void testEmpty() {
+    public void empty_shouldReturnEmptyList() {
         // TODO test
     }
 
     @Test
-    public void testOfWithSingleArgument() {
+    public void of_withSinglePoint_shouldReturnListOfPoint() {
         // TODO test PointList.of(Point p)
     }
 
     @Test
-    public void testOfWithTwoArguments() {
+    public void of_withTwoPoints_shouldReturnListOfOrderedPoints() {
         // TODO test
     }
 
     @Test
-    public void testOfWithThreeArguments() {
+    public void of_withThreePoints_shouldReturnListOfOrderedPoints() {
         // TODO test
     }
 
     @Test
-    public void testOfWithSinglePointCoordinates() {
+    public void of_withSinglePointCoordinates_shouldReturnListOfPoint() {
         // TODO test PointList.of(int x, int y)
     }
 
     @Test
-    public void testOfWithTwoPointCoordinates() {
+    public void of_withTwoPointCoordinates_shouldReturnListOfPoints() {
         // TODO test
     }
 
     @Test
-    public void testOfWithThreePointCoordinates() {
+    public void of_withThreePointCoordinates_shouldReturnListOfPoints() {
     }
 
     @Test
@@ -53,12 +53,12 @@ public class PointListTest {
     }
 
     @Test
-    public void testCopyOfList() {
+    public void copyOfList_shouldReturnNewIdenticalList() {
         // TODO test
     }
 
     @Test
-    public void testCopyOfHashSet() {
+    public void copyOfHashSet_shouldReturnNewListWithDifferentOrder() {
         // TODO test
     }
 }
