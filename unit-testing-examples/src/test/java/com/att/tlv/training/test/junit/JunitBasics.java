@@ -21,7 +21,6 @@ public class JunitBasics {
     }
     
     
-    
     // Set up and tear down methods:
     
     // MUST be a public static method!
