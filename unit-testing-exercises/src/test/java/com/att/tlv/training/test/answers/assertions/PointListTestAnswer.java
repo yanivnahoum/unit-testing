@@ -76,7 +76,7 @@ public class PointListTestAnswer {
     }
 
     @Test
-    public void copyOfHashSet_shouldReturnNewListWithDifferentOrder() {
+    public void copyOfHashSet_shouldReturnNewList_possiblyWithDifferentOrder() {
         Set<Point> source = newHashSet(P1, P2, P3);
         List<Point> copy = PointList.copyOf(source);
         // HashSet iteration order is not predicatble.
