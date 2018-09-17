@@ -16,17 +16,17 @@ public class WebTargetProviderTest {
     }
 
     @Test
-    public void testGetNew() {
+    public void getWithNewUrl_shouldReturnWebTargetFromClient() {
         // TODO test WebTargetProvider.get() with a new url.
     }
     
     @Test
-    public void testGetExisting() {
+    public void getWithExistingUrl_shouldReturnCachedWebTarget() {
         // TODO test WebTargetProvider.get() with an existing url.
     }
     
     @Test
-    public void testGetWithNullURL() {
+    public void getWithNullUrl_shouldThrowNullPointerException() {
         // TODO test WebTargetProvider.get() with a null url - Client.target throws a NullPointerException
         // We'd like to make sure it isn't suppressed.
     }
