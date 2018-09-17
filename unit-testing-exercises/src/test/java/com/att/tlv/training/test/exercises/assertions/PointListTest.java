@@ -58,7 +58,7 @@ public class PointListTest {
     }
 
     @Test
-    public void copyOfHashSet_shouldReturnNewList_possiblyWithDifferentOrder() {
+    public void copyOfHashSet_shouldReturnNewList_inAnyOrder() {
         // TODO test
     }
 }

@@ -82,10 +82,16 @@ public class ExceptionAssertions {
     @Test
     public void test_assertThatThrownBy() {
         // @formatter:off
-        assertThatThrownBy(() -> { throw new IllegalArgumentException("boom!"); })
+        assertThatThrownBy(() -> validate(-1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("boom");
+                .hasMessageContaining("Invalid");
         // @formatter:on
+    }
+
+    private void validate(int value) {
+        if (value < 0){
+            throw new IllegalArgumentException("Invalid value: " + value);
+        }
     }
 
     @Test
@@ -134,15 +140,14 @@ public class ExceptionAssertions {
 
 class MyException extends Exception {
 
-    private static final long serialVersionUID = 1L;
     private final int total;
 
-    public MyException(String message, int total) {
+    MyException(String message, int total) {
         super(message);
         this.total = total;
     }
 
-    public int getTotal() {
+    int getTotal() {
         return total;
     }
 }
