@@ -5,7 +5,9 @@ import com.att.tlv.training.test.data.Point;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -104,6 +106,59 @@ public class IterableAssertions {
         assertThat(people).usingElementComparator(comparingInt(Person::getAge))
                 .contains(alice);
         // This goes for all methods we saw - containAll/Only/Exactly etc.
+    }
+
+    @Test
+    public void testIterablesOfDifferentTypes() {
+        List<A> as = newArrayList(new A("one"), new A("two"));
+        List<B> bs = newArrayList(new B("one"), new B("two"));
+
+        Comparator<Object> a2b = (o1, o2) -> {
+            if (o1 instanceof  A && o2 instanceof B) {
+                A a = (A) o1;
+                B b = (B) o2;
+                if (Objects.equals(a.getName(), b.getName())) {
+                    return 0;
+                }
+            }
+            return 1;
+        };
+
+        assertThat(as).usingElementComparator(a2b).isEqualTo(bs);
+
+    }
+
+    class A {
+        private String name;
+
+        A(String name) {
+            this.name = name;
+        }
+
+        String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName() + ": " + name;
+        }
+    }
+    class B {
+        private String name;
+
+        B(String name) {
+            this.name = name;
+        }
+
+        String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName() + ": " + name;
+        }
     }
 
     @Test
