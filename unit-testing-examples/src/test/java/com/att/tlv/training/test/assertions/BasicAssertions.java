@@ -2,7 +2,7 @@ package com.att.tlv.training.test.assertions;
 
 import com.att.tlv.training.test.data.Person;
 import com.att.tlv.training.test.data.Point;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -124,7 +124,7 @@ public class BasicAssertions {
                     .isEqualTo(55);
         }
         catch (AssertionError e) {
-            assertThat(e).hasMessage("[check John's age] expected:<[55]> but was:<[30]>");
+            assertThat(e).hasMessageContaining("[check John's age]");
         }
 
         try {
