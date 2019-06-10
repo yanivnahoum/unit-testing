@@ -2,22 +2,22 @@ package com.att.tlv.training.test.answers.assertions;
 
 import com.att.tlv.training.test.exercises.assertions.PointCalculator;
 import com.att.tlv.training.test.exercises.data.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PointCalculatorTestAnswer {
+class PointCalculatorTestAnswer {
     
     private PointCalculator pointCalculator;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         pointCalculator = new PointCalculator();
     }
 
     @Test
-    public void add_nonOriginPoints_shouldReturnSum() {
+    void add_nonOriginPoints_shouldReturnSum() {
         int aX = 0, aY = 2;
         int bX = 3, bY = 0;
         Point a = new Point(aX, aY);
@@ -36,7 +36,7 @@ public class PointCalculatorTestAnswer {
     }
     
     @Test
-    public void add_pointAndOrigin_shouldReturnPoint() {
+    void add_pointAndOrigin_shouldReturnPoint() {
         Point a = new Point(1, 2);
         Point origin = new Point(0, 0);
         
@@ -46,7 +46,7 @@ public class PointCalculatorTestAnswer {
     }
     
     @Test
-    public void add_originAndPoint_shouldReturnPoint() {
+    void add_originAndPoint_shouldReturnPoint() {
         Point a = new Point(1, 2);
         Point origin = new Point(0, 0);
         

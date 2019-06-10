@@ -12,12 +12,12 @@ import java.util.function.Consumer;
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BasicAssertions {
+class BasicAssertions {
 
-    private Person john = new Person(333, "John", 30, 1.85d);
+    private final Person john = new Person(333, "John", 30, 1.85d);
 
     @Test
-    public void test_isEqualTo_isNotEqualTo() {
+    void test_isEqualTo_isNotEqualTo() {
         // The most simple assertion
         assertThat(john.getAge()).isEqualTo(30);
         assertThat(john.getName()).isEqualTo("John")
@@ -29,7 +29,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void test_isSame_isNotSame() {
+    void test_isSame_isNotSame() {
         // isSame compares objects reference
         Object sameJohn = john;
         // is equal to john but not the same
@@ -42,7 +42,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void test_isIn_isNotIn() {
+    void test_isIn_isNotIn() {
         List<Integer> ints = Arrays.asList(10, 20, 30);
 
         assertThat(20).isIn(ints);
@@ -53,7 +53,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void test_isNull_isNotNull() {
+    void test_isNull_isNotNull() {
         Object nullObject = null;
         assertThat(nullObject).isNull();
         Object nonNullObject = new Object();
@@ -61,7 +61,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void isInstanceOf_assertions_examples() {
+    void isInstanceOf_assertions_examples() {
         assertThat(john).isInstanceOf(Person.class)
                 .isInstanceOfAny(Object.class, Person.class);
         assertThat(john).isNotInstanceOf(HashMap.class)
@@ -69,7 +69,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void testEqualityWithCustomComparator() {
+    void testEqualityWithCustomComparator() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person alice = new Person(555, "Alice", 30, 1.65d);
 
@@ -89,7 +89,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void test_isEqualToComparingOnlyGivenFields_isEqualToComparingFieldByField() {
+    void test_isEqualToComparingOnlyGivenFields_isEqualToComparingFieldByField() {
         Point oneTwo = new Point(1, 2);
         Point oneTwoClone = new Point(1, 2);
 
@@ -103,7 +103,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void test_satisfies() {
+    void test_satisfies() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person alice = new Person(555, "Alice", 25, 1.65d);
 
@@ -117,7 +117,7 @@ public class BasicAssertions {
     }
 
     @Test
-    public void test_assertionMessages() {
+    void test_assertionMessages() {
         try {
             // You can specify a test description with as() method or describedAs(), it supports String format args
             assertThat(john.getAge()).as("check %s's age", john.getName())

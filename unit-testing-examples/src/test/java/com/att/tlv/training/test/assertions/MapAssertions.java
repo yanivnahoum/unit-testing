@@ -2,7 +2,7 @@ package com.att.tlv.training.test.assertions;
 
 import com.att.tlv.training.test.data.Person;
 import com.google.common.collect.ImmutableMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.LinkedHashMap;
@@ -15,10 +15,10 @@ import static java.util.stream.Collectors.toMap;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
-public class MapAssertions {
+class MapAssertions {
 
     @Test
-    public void mapBasicAssertions() {
+    void mapBasicAssertions() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person alice = new Person(555, "Alice", 30, 1.65d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
@@ -66,7 +66,7 @@ public class MapAssertions {
     }
 
     @Test
-    public void testMap_containsAllEntriesOf() {
+    void testMap_containsAllEntriesOf() {
         ImmutableMap<Integer, String> bigMap = ImmutableMap.of(1, "one",
                 2, "two",
                 3, "three");
@@ -78,7 +78,7 @@ public class MapAssertions {
     }
 
     @Test
-    public void testMap_containsOnly_containsExactly() throws Exception {
+    void testMap_containsOnly_containsExactly() {
 
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person alice = new Person(555, "Alice", 30, 1.65d);

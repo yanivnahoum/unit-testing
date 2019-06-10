@@ -1,7 +1,7 @@
 package com.att.tlv.training.test.mocks;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import java.util.concurrent.ExecutorService;
 
 import static org.mockito.Mockito.mock;
 
-public class MockCreation {
+class MockCreation {
     
-    @SuppressWarnings("unused")
     @Test
-    public void create() {
+    @SuppressWarnings("unused")
+    void create() {
         // We can mock non-generic interfaces
         ExecutorService executorService = mock(ExecutorService.class);
         // We can mock non-generic classes
@@ -26,10 +26,10 @@ public class MockCreation {
         ArrayList<?> arrayList = mock(ArrayList.class);   
     }
 
-    @Ignore
-    @SuppressWarnings("unused")
+    @Disabled
     @Test
-    public void cannotCreate() {
+    @SuppressWarnings("unused")
+    void cannotCreate() {
         // There are a few types we can't create:
         // Final classes / methods
         String str = mock(String.class);    

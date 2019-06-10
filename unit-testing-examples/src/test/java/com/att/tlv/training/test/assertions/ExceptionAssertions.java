@@ -1,7 +1,7 @@
 package com.att.tlv.training.test.assertions;
 
 import org.assertj.core.api.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIOException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ExceptionAssertions {
+class ExceptionAssertions {
 
     @Test
-    public void testBasicExceptionAssertions() {
+    void testBasicExceptionAssertions() {
 
         List<String> list = newArrayList("zero", "one", "two", "three", "four");
 
@@ -37,20 +37,20 @@ public class ExceptionAssertions {
 
             // String#format syntax support
             assertThat(e).hasMessage("Index: %s, Size: %s", 9, 5);
-            
+
             // Sometimes message are not entirely predictable, you can then check for start, end or containing string.
             assertThat(e).hasMessageStartingWith("Index: 9")
-                    .hasMessageContaining("9")
-                    .hasMessageEndingWith("Size: 5");
+                         .hasMessageContaining("9")
+                         .hasMessageEndingWith("Size: 5");
             // This is equivalent to:
             assertThat(e.getMessage()).startsWith("Index: 9")
-                    .contains("9")
-                    .endsWith("Size: 5");
+                                      .contains("9")
+                                      .endsWith("Size: 5");
         }
     }
 
     @Test
-    public void testCauseType() throws Exception {
+    void testCauseType() {
 
         Throwable throwable = new Throwable(new NullPointerException("boom"));
 
@@ -80,7 +80,7 @@ public class ExceptionAssertions {
     }
 
     @Test
-    public void test_assertThatThrownBy() {
+    void test_assertThatThrownBy() {
         // @formatter:off
         assertThatThrownBy(() -> validate(-1))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -89,53 +89,50 @@ public class ExceptionAssertions {
     }
 
     private void validate(int value) {
-        if (value < 0){
+        if (value < 0) {
             throw new IllegalArgumentException("Invalid value: " + value);
         }
     }
 
     @Test
-    public void test_assertThatExceptionOfType() {
-        // @formatter:off
+    void test_assertThatExceptionOfType() {
         assertThatExceptionOfType(IOException.class).isThrownBy(() -> { throw new IOException("boom!"); })
-                .withMessage("boom!")
-                .withMessageContaining("oom")
-                .withMessage("%s!", "boom")
-                .withStackTraceContaining("IOException")
-                .withNoCause();
-        
+                                                    .withMessage("boom!")
+                                                    .withMessageContaining("oom")
+                                                    .withMessage("%s!", "boom")
+                                                    .withStackTraceContaining("IOException")
+                                                    .withNoCause();
+
         // Shortcut for IOException, NullPointerException, IllegalArgumentException, IllegalStateException:
         assertThatIOException().isThrownBy(() -> { throw new IOException("boom!"); })
-                .withMessage("boom!");
-        // @formatter:on
+                               .withMessage("boom!");
     }
-    
+
     @Test
-    public void test_doesNotThrowAnyException() {
+    void test_doesNotThrowAnyException() {
         assertThatCode(() -> doSomething("hello")).doesNotThrowAnyException();
     }
-    
+
     private int doSomething(String s) {
         return s.length();
     }
 
     @Test
-    public void assertException() {
+    void assertException() {
         // A condition accepts a predicate and a description (formatted strings accepted)
         Condition<MyException> aTotalGreaterThan10 = new Condition<>(e -> e.getTotal() > 10, "a total that is greater than 10");
 
         assertThatExceptionOfType(MyException.class).isThrownBy(this::throwMyException)
-                .withMessage("An error occurred")
-                // We can use the predicate directly
-                .matches(e -> e.getTotal() > 10)
-                // Or the condition - assertion failures will use our description
-                .has(aTotalGreaterThan10);
+                                                    .withMessage("An error occurred")
+                                                    // We can use the predicate directly
+                                                    .matches(e -> e.getTotal() > 10)
+                                                    // Or the condition - assertion failures will use our description
+                                                    .has(aTotalGreaterThan10);
     }
 
     private void throwMyException() throws MyException {
         throw new MyException("An error occurred", 20);
     }
-
 }
 
 class MyException extends Exception {

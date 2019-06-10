@@ -1,19 +1,19 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Note the name & location of this test:
  * It's called the same as the class under test with the suffix 'Test'.
  * It's located in the same package as the class under test, under src/test/java
  */
-public class PointCalculatorTest {
+class PointCalculatorTest {
     
     private PointCalculator pointCalculator;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         pointCalculator = new PointCalculator();
     }
 
@@ -21,18 +21,18 @@ public class PointCalculatorTest {
      * Make sure PointCalculator::add returns the expected result for non-origin Points.
      */
     @Test
-    public void add_nonOriginPoints_shouldReturnSum() {
+    void add_nonOriginPoints_shouldReturnSum() {
         // TODO test PointCalculator.add.
     }
     
     @Test
-    public void add_pointAndOrigin_shouldReturnPoint() {
+    void add_pointAndOrigin_shouldReturnPoint() {
         // TODO test PointCalculator.add. Make sure it
         // returns the non-origin Point p when p and an origin point are added (in that order).
     }
     
     @Test
-    public void add_originAndPoint_shouldReturnPoint() {
+    void add_originAndPoint_shouldReturnPoint() {
         // TODO test PointCalculator.add. Make sure it
         // returns the non-origin Point p when origin point and p are added (in that order).
     }

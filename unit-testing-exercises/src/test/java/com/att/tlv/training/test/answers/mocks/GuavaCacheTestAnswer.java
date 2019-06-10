@@ -6,21 +6,21 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalCause;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class GuavaCacheTestAnswer {
+@ExtendWith(MockitoExtension.class)
+class GuavaCacheTestAnswer {
 
     private static final long EXPIRATION_INTERVAL_SEC = 30;    
     private static final long EXPIRED_INTERVAL_NS = SECONDS.toNanos(EXPIRATION_INTERVAL_SEC + 1);    
@@ -32,8 +32,8 @@ public class GuavaCacheTestAnswer {
     @Captor
     private ArgumentCaptor<RemovalNotification<Integer, Integer>> removalNotificationCaptor;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         cache = CacheBuilder.newBuilder()
                 .expireAfterWrite(EXPIRATION_INTERVAL_SEC, SECONDS)
                 .removalListener(removalListener)
@@ -42,7 +42,7 @@ public class GuavaCacheTestAnswer {
     }
 
     @Test
-    public void testInvalidateKey() {
+    void testInvalidateKey() {
         int key = 10;
         int value = 100;
         cache.put(key, value);
@@ -52,7 +52,7 @@ public class GuavaCacheTestAnswer {
     }
     
     @Test
-    public void testInvalidateExpiredKey() {
+    void testInvalidateExpiredKey() {
         when(ticker.read()).thenReturn(0L, EXPIRED_INTERVAL_NS);
         
         int key = 10;
@@ -64,7 +64,7 @@ public class GuavaCacheTestAnswer {
     }
     
     @Test
-    public void testReplaceKey() {
+    void testReplaceKey() {
         int key = 10;
         int value1 = 100;
         int value2 = 101;
@@ -75,7 +75,7 @@ public class GuavaCacheTestAnswer {
     }
     
     @Test
-    public void testReplaceExpiredKey() {
+    void testReplaceExpiredKey() {
         when(ticker.read()).thenReturn(0L, EXPIRED_INTERVAL_NS);
         
         int key = 10;

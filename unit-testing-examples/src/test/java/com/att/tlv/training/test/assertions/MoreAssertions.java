@@ -1,6 +1,6 @@
 package com.att.tlv.training.test.assertions;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,10 +9,10 @@ import java.util.OptionalInt;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MoreAssertions {
+class MoreAssertions {
 
     @Test
-    public void testNumbers() {
+    void testNumbers() {
         assertThat(50).isGreaterThanOrEqualTo(49);
         assertThat(50).isGreaterThanOrEqualTo(50);
 
@@ -28,7 +28,7 @@ public class MoreAssertions {
     }
 
     @Test
-    public void testStrings() {
+    void testStrings() {
         assertThat("Hello").startsWith("Hel")
                 .endsWith("lo")
                 .hasSize(5);
@@ -45,7 +45,7 @@ public class MoreAssertions {
     }
 
     @Test
-    public void testJava8DateAndTime() {
+    void testJava8DateAndTime() {
         assertThat(LocalDate.now()).isToday();
 
         LocalDateTime firstOfJanuary2000 = LocalDateTime.parse("2000-01-01T00:00:00");
@@ -72,17 +72,17 @@ public class MoreAssertions {
 
         // ... minutes
         localDateTime1 = LocalDateTime.of(2000, 1, 1, 23, 50, 0, 0);
-        localDateTime2 = LocalDateTime.of(2000, 1, 1, 23, 00, 2, 7);
+        localDateTime2 = LocalDateTime.of(2000, 1, 1, 23, 0, 2, 7);
         assertThat(localDateTime1).isEqualToIgnoringMinutes(localDateTime2);
 
         // ... hours
         localDateTime1 = LocalDateTime.of(2000, 1, 1, 23, 59, 59, 999);
-        localDateTime2 = LocalDateTime.of(2000, 1, 1, 00, 00, 00, 000);
+        localDateTime2 = LocalDateTime.of(2000, 1, 1, 0, 0, 0, 0);
         assertThat(localDateTime1).isEqualToIgnoringHours(localDateTime2);
     }
 
     @Test
-    public void testOptionals() {
+    void testOptionals() {
         Optional<String> optional = Optional.of("Test");
         assertThat(optional).isPresent()
                 .containsInstanceOf(String.class)

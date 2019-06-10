@@ -1,22 +1,22 @@
 package com.att.tlv.training.test.answers.assertions;
 
 import com.att.tlv.training.test.exercises.assertions.Thrower;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ThrowerTestAnswer {
+class ThrowerTestAnswer {
     
     @Test
-    public void addExactWithOverflow_shouldThrowException() {
+    void addExactWithOverflow_shouldThrowException() {
         assertThatThrownBy(() -> Thrower.addExact(Integer.MAX_VALUE, 1))
                 .isExactlyInstanceOf(ArithmeticException.class)
                 .hasNoCause();
     }
     
     @Test
-    public void throwNestedException_shouldThrowExceptionWithCorrectMessageAndCause() {
+    void throwNestedException_shouldThrowExceptionWithCorrectMessageAndCause() {
         assertThatThrownBy(Thrower::throwNestedException)
             .isExactlyInstanceOf(RuntimeException.class)
             .hasMessage("Argument is not valid!")

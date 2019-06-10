@@ -1,16 +1,16 @@
 package com.att.tlv.training.test.exercises.assertions;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ThrowerTest {
+class ThrowerTest {
     
     @Test
-    public void addExactWithOverflow_shouldThrowException() {
+    void addExactWithOverflow_shouldThrowException() {
         // TODO test Thrower.addExact. Be specific in your assertions.
     }
     
     @Test
-    public void throwNestedException_shouldThrowExceptionWithCorrectMessageAndCause() {
+    void throwNestedException_shouldThrowExceptionWithCorrectMessageAndCause() {
         // TODO test Thrower.throwNestedException. Be specific in your assertions.
     }
 }

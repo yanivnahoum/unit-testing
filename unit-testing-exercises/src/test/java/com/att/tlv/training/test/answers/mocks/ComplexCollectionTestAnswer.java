@@ -2,11 +2,11 @@ package com.att.tlv.training.test.answers.mocks;
 
 import com.att.tlv.training.test.exercises.data.Person;
 import com.att.tlv.training.test.exercises.mocks.ComplexCollection;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Map;
@@ -25,21 +25,21 @@ import static org.mockito.Mockito.verifyZeroInteractions;
  * it would be via verifying mock behaviors.
  * See {@link ComplexCollection}
  */
-@RunWith(MockitoJUnitRunner.StrictStubs.class)
-public class ComplexCollectionTestAnswer {
+@ExtendWith(MockitoExtension.class)
+class ComplexCollectionTestAnswer {
     
     private static final Person ALICE = new Person(500, "Alice");
     private ComplexCollection<Long, Person> complexCollection;
     @Mock private List<Person> persons;
     @Mock private Map<Long, Person> idToPerson;
     
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         complexCollection = new ComplexCollection<>(() -> persons, () -> idToPerson, Person::getId);
     }
     
     @Test
-    public void testAdd() {
+    void testAdd() {
         complexCollection.add(ALICE);
         
         verify(persons).add(ALICE);
@@ -47,7 +47,7 @@ public class ComplexCollectionTestAnswer {
     }
     
     @Test
-    public void testAddNCopies() {
+    void testAddNCopies() {
         int numOfCopies = 50;
         complexCollection.addNCopies(ALICE, numOfCopies);
         
@@ -56,7 +56,7 @@ public class ComplexCollectionTestAnswer {
     }
     
     @Test
-    public void testAddNCopiesWithInvalidNumber() {
+    void testAddNCopiesWithInvalidNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> complexCollection.addNCopies(ALICE, -1))
                 .withMessage("Number of copies must be greater than 0");
 
@@ -72,7 +72,7 @@ public class ComplexCollectionTestAnswer {
     }
     
     @Test
-    public void testRemove() {
+    void testRemove() {
         complexCollection.remove(ALICE);
         
         verify(persons).remove(ALICE);

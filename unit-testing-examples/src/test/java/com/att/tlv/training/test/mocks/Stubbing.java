@@ -1,10 +1,11 @@
 package com.att.tlv.training.test.mocks;
 
 import com.att.tlv.training.test.data.Person;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.util.List;
 
@@ -20,17 +21,19 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.intThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
+import static org.mockito.quality.Strictness.STRICT_STUBS;
 
-@RunWith(MockitoJUnitRunner.StrictStubs.class)
-public class Stubbing {
-    
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = STRICT_STUBS)
+class Stubbing {
+
     @Mock
     private List<String> strings;
     @Mock
     private List<Person> persons;
     
     @Test
-    public void basicStubbing() {
+    void basicStubbing() {
         // Default value: 
         String value = strings.get(5);        
         assertThat(value).isNull();
@@ -59,7 +62,7 @@ public class Stubbing {
     }
     
     @Test
-    public void stubbingWithArgumentMatchers() {
+    void stubbingWithArgumentMatchers() {
         // We can stub with argument matchers
         when(strings.get(anyInt())).thenReturn("Shalom");
         String value = strings.get(1024);        
@@ -106,7 +109,7 @@ public class Stubbing {
     }
     
     @Test
-    public void stubbingWithExceptions() {
+    void stubbingWithExceptions() {
         // Stub to throw exception:
         when(strings.get(5)).thenThrow(new IllegalArgumentException("Exception thrown by mock"));
         // Assert
@@ -114,7 +117,7 @@ public class Stubbing {
     }
     
     @Test
-    public void stubbingConsecutiveCalls() {
+    void stubbingConsecutiveCalls() {
         when(strings.get(5)).thenReturn("Hello")
                 .thenReturn("how")
                 .thenReturn("are")
@@ -162,7 +165,7 @@ public class Stubbing {
     
     // Why would we need to stub void methods?
     @Test
-    public void stubbingVoidMethods() {
+    void stubbingVoidMethods() {
         // Unfortunately, this doesn't compile
         // when(strings.clear()).thenThrow(new IllegalArgumentException());
         
@@ -172,7 +175,7 @@ public class Stubbing {
     }
     
     @Test
-    public void stubbingConsecutiveVoidMethods() {
+    void stubbingConsecutiveVoidMethods() {
         doThrow(new IllegalArgumentException())
                 // This call allows us to cancel the previous behavior
                 .doNothing()
@@ -180,14 +183,14 @@ public class Stubbing {
         assertThatIllegalArgumentException().isThrownBy(() -> strings.clear());
         assertThatCode(strings::clear).doesNotThrowAnyException();
     }
-    
+
     @Test
-    public void unnecessaryStubbing() {
-        // Note: after making the changes below, the whole class must be run, not only this test
+    void unnecessaryStubbing() {
         when(strings.get(5)).thenReturn("hello");
-        // Uncomment the following line to get a "Strict stubbing argument mismatch"
-        //strings.get(4);    
-        // Comment the following line to see mockito's unnecessary stubbing detection in action 
-        strings.get(5);    
+        // Comment the following line to see mockito's unnecessary stubbing detection in action
+        strings.get(5);
+        // This can be bypassed, at the stub (lenient().when()...), mock (@Mock(lenient = true), or class (@MockSettings(strictness = LENIENT)) level.
+        // If following line were in a different class (not the test class) we'd get a "Strict stubbing argument mismatch"
+        // strings.get(100);
     }
 }

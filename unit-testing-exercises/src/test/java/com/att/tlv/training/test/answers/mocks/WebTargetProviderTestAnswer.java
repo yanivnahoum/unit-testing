@@ -1,11 +1,11 @@
 package com.att.tlv.training.test.answers.mocks;
 
 import com.att.tlv.training.test.exercises.mocks.WebTargetProvider;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -18,21 +18,21 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class WebTargetProviderTestAnswer {
+@ExtendWith(MockitoExtension.class)
+class WebTargetProviderTestAnswer {
     
     private static final String URL = "http://web.att.com/api/conferences";
     private WebTargetProvider webTargetProvider;
     @Mock private Client client;
     @Mock private WebTarget webTarget;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         webTargetProvider = new WebTargetProvider(client);
     }
 
     @Test
-    public void getWithNewUrl_shouldReturnWebTargetFromClient() {
+    void getWithNewUrl_shouldReturnWebTargetFromClient() {
         when(client.target(URL)).thenReturn(webTarget);
         
         WebTarget actualTarget = webTargetProvider.get(URL);
@@ -44,7 +44,7 @@ public class WebTargetProviderTestAnswer {
     }
     
     @Test
-    public void getWithExistingUrl_shouldReturnCachedWebTarget() {
+    void getWithExistingUrl_shouldReturnCachedWebTarget() {
         when(client.target(URL)).thenReturn(webTarget);
         
         webTargetProvider.get(URL);
@@ -57,7 +57,7 @@ public class WebTargetProviderTestAnswer {
     }
     
     @Test
-    public void getWithNullUrl_shouldThrowNullPointerException() {
+    void getWithNullUrl_shouldThrowNullPointerException() {
         NullPointerException ex = new NullPointerException("This exception was intentionally thrown by a mock");
         String url = null;
         when(client.target(url)).thenThrow(ex);

@@ -1,28 +1,28 @@
 package com.att.tlv.training.test.exercises.mocks;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class RestClientTest {
+@ExtendWith(MockitoExtension.class)
+class RestClientTest {
     
     private RestClient restClient;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         // TODO init
     }
 
     @Test
-    public void get_shouldCallSetRequestPath_andHeader_andReturnOkResponse() {
+    void get_shouldCallSetRequestPath_andHeader_andReturnOkResponse() {
         // TODO test RestClient.get() happy scenario
         // Verify all required behavior
     }
     
     @Test
-    public void whenClientThrowsException_get_shouldReturnInternalServerErrorResponse() {
+    void whenClientThrowsException_get_shouldReturnInternalServerErrorResponse() {
         // TODO test RestClient.get() unhappy scenario - webTargetProvider.get() throws.
         // Verify all required behavior
     }

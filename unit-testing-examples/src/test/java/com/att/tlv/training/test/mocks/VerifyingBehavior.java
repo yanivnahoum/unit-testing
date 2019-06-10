@@ -1,10 +1,10 @@
 package com.att.tlv.training.test.mocks;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-@RunWith(MockitoJUnitRunner.class)
-public class VerifyingBehavior {
+@ExtendWith(MockitoExtension.class)
+class VerifyingBehavior {
 
     @Mock
     private List<Integer> numbers;
@@ -27,7 +27,7 @@ public class VerifyingBehavior {
     private List<String> someOtherMock;
 
     @Test
-    public void basicVerification() {
+    void basicVerification() {
         numbers.add(1);
 
         // Verify exact invocation
@@ -47,7 +47,7 @@ public class VerifyingBehavior {
     }
 
     @Test
-    public void verifyMultipleInvocations() {
+    void verifyMultipleInvocations() {
         numbers.add(1);
         numbers.add(2);
         numbers.add(2);
@@ -81,7 +81,7 @@ public class VerifyingBehavior {
     }
     
     @Test
-    public void verifyInvocationOrder() {
+    void verifyInvocationOrder() {
         numbers.add(1);
         numbers.add(2);
         
@@ -112,7 +112,7 @@ public class VerifyingBehavior {
     }
     
     @Test
-    public void verifyNoInteractions() {
+    void verifyNoInteractions() {
         numbers.add(1);
 
         // Standard stuff

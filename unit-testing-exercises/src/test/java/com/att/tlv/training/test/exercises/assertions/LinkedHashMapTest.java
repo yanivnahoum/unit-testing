@@ -1,56 +1,56 @@
 package com.att.tlv.training.test.exercises.assertions;
 
 import com.att.tlv.training.test.exercises.data.Person;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LinkedHashMapTest {
+class LinkedHashMapTest {
     
     private static final Person ALICE = new Person(100L, "Alice");
     private static final Person BOB = new Person(200L, "Bob");
     private static final Person CARL = new Person(300L, "Carl");
     private Map<Long, Person> map;
     
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         map = new LinkedHashMap<>();
     }
     
     @Test
-    public void testNewMapIsEmpty() {
+    void testNewMapIsEmpty() {
         // TODO test
     }
     
     @Test
-    public void testPutTwoEntries() {
+    void testPutTwoEntries() {
         // TODO test calling map.put() twice
     }
     
     @Test
-    public void testGetExistingEntry() {
+    void testGetExistingEntry() {
         // TODO test map.get(id) for an existing person
     }
     
     @Test
-    public void testGetMissingEntry() {
+    void testGetMissingEntry() {
         // TODO test map.get(id) for a missing person
     }
     
     @Test
-    public void testConstructorWithMap() {
+    void testConstructorWithMap() {
         // TODO test new LinkedHashMap<>(sourceMap)
     }
     
     @Test
-    public void testRemoveOneOfTwoEntries() {
+    void testRemoveOneOfTwoEntries() {
         // TODO test put two entries and remove one of them
     }
     
     @Test
-    public void testRemoveMissingEntry() {
+    void testRemoveMissingEntry() {
         // TODO test put two entries and try to remove a third (missing)
     }
 }

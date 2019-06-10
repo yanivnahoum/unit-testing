@@ -1,10 +1,10 @@
 package com.att.tlv.training.test.mocks;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
@@ -18,14 +18,14 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class StubbingCallbacks {
+@ExtendWith(MockitoExtension.class)
+class StubbingCallbacks {
     
     @Mock
     private List<String> strings;
     
     @Test
-    public void stubWithCallback() {
+    void stubWithCallback() {
         // Originally List.add returns the default value for boolean - false
         assertThat(strings.add("hello")).isFalse();
         
@@ -54,7 +54,7 @@ public class StubbingCallbacks {
     }
     
     @Test
-    public void stubVoidMethodWithCallback() {
+    void stubVoidMethodWithCallback() {
         // We already know that this does not compile
         //when(strings.clear())...
         // Like doThrow, we have method doAnswer
@@ -68,7 +68,7 @@ public class StubbingCallbacks {
     }
     
     @Test
-    public void testMockitoWithWildcards() {
+    void testMockitoWithWildcards() {
         DummyClass dummyClass = mock(DummyClass.class);
         List<? extends Number> someList = new ArrayList<Integer>();
         //when(dummyClass.dummyMethod()).thenReturn(someList); //Compiler complains about this
@@ -86,7 +86,7 @@ public class StubbingCallbacks {
 }
 
 class DummyClass {
-    public List<? extends Number> dummyMethod() {
+    List<? extends Number> dummyMethod() {
         return new ArrayList<Integer>();
     }
 }
