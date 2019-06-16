@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIOException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class ExceptionAssertions {
 
@@ -32,20 +33,28 @@ class ExceptionAssertions {
             // You can check if exception has no cause
             assertThat(e).hasNoCause();
 
-            // You can check exception message
-            assertThat(e).hasMessage("Index: 9, Size: 5");
+            assumingThat(isJava8(), () -> {
+                // You can check exception message
+                assertThat(e).hasMessage("Index: 9, Size: 5");
+                // String#format syntax support
+                assertThat(e).hasMessage("Index: %d, Size: %d", 9, 5);
+            });
 
-            // String#format syntax support
-            assertThat(e).hasMessage("Index: %s, Size: %s", 9, 5);
+            assumingThat(isJava11(), () -> {
+                // You can check exception message
+                assertThat(e).hasMessage("Index 9 out of bounds for length 5");
+                // String#format syntax support
+                assertThat(e).hasMessage("Index %d out of bounds for length %d", 9, 5);
+            });
 
             // Sometimes message are not entirely predictable, you can then check for start, end or containing string.
-            assertThat(e).hasMessageStartingWith("Index: 9")
+            assertThat(e).hasMessageStartingWith("Index")
                          .hasMessageContaining("9")
-                         .hasMessageEndingWith("Size: 5");
+                         .hasMessageEndingWith("5");
             // This is equivalent to:
-            assertThat(e.getMessage()).startsWith("Index: 9")
+            assertThat(e.getMessage()).startsWith("Index")
                                       .contains("9")
-                                      .endsWith("Size: 5");
+                                      .endsWith("5");
         }
     }
 
@@ -132,6 +141,18 @@ class ExceptionAssertions {
 
     private void throwMyException() throws MyException {
         throw new MyException("An error occurred", 20);
+    }
+
+    private static boolean isJava8() {
+        return javaVersion().startsWith("1.8");
+    }
+
+    private static boolean isJava11() {
+        return javaVersion().startsWith("11");
+    }
+
+    private static String javaVersion() {
+        return System.getProperty("java.version");
     }
 }
 
