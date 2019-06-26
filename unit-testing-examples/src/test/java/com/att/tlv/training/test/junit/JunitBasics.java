@@ -29,7 +29,7 @@ class JunitBasics {
 
     @Test
     @DisplayName("Test #3")
-    @Disabled
+    @Disabled("Disabled until bug #42 has been resolved")
     @DisabledOnJre(JAVA_8)
     @DisabledIfSystemProperty(named = "env-type", matches = "ci")
     void test3() {
