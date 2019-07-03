@@ -15,7 +15,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
-import static org.assertj.core.groups.Tuple.tuple;
+import static org.assertj.core.api.Assertions.tuple;
 
 class IterableAssertions {
 
@@ -185,6 +185,9 @@ class IterableAssertions {
         };
 
         assertThat(as).usingElementComparator(a2b).isEqualTo(bs);
+        assertThat(as).extracting(a -> new B(a.getName()))
+                      .usingFieldByFieldElementComparator()
+                      .isEqualTo(bs);
     }
 
     class A {
