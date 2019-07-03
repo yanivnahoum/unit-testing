@@ -38,7 +38,7 @@ class JunitParameterizedTests {
         }
 
         @ParameterizedTest
-        @ValueSource(ints = {-2, 4, 20, 100})
+        @ValueSource(ints = {-2, 0, 4, 20, 100})
         void isEven(int value) {
             boolean even = calculator.isEven(value);
             assertThat(even).isTrue();
@@ -64,20 +64,20 @@ class JunitParameterizedTests {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @ParameterizedTest
-    @MethodSource
-    void maxShouldReturnGreaterNumber(int x, int y, int expected) {
-        Calculator calculator = new Calculator();
-        int actual = calculator.max(x, y);
-        assertThat(actual).isEqualTo(expected);
-    }
-
     static Stream<Arguments> maxShouldReturnGreaterNumber() {
         return Stream.of(
                 arguments(1, 2, 2),
                 arguments(2, 1, 2),
                 arguments(1, 1, 1)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void maxShouldReturnGreaterNumber(int x, int y, int expected) {
+        Calculator calculator = new Calculator();
+        int actual = calculator.max(x, y);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -95,7 +95,6 @@ class JunitParameterizedTests {
     @Nested
     class EnumSources {
 
-
         @ParameterizedTest
         @EnumSource(DayOfWeek.class)
         void enumSourceValue_shouldBeBetween1And7(DayOfWeek dayOfWeek) {
@@ -104,7 +103,8 @@ class JunitParameterizedTests {
         }
 
         @ParameterizedTest
-        @EnumSource(value = DayOfWeek.class, mode = MATCH_ALL, names = {"^.+DAY$", "^(T|S).+$"})
+        @EnumSource(value = DayOfWeek.class, mode = MATCH_ALL,
+                names = {"^.+DAY$", "^(T|S).+$"})
         void enumSourceMatchesCondition(DayOfWeek dayOfWeek) {
             String name = dayOfWeek.name();
             assertThat(name).matches(day -> (day.startsWith("T") || day.startsWith("S"))
