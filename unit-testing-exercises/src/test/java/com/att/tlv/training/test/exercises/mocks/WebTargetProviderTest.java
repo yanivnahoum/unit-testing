@@ -28,6 +28,6 @@ class WebTargetProviderTest {
     @Test
     void getWithNullUrl_shouldThrowNullPointerException() {
         // TODO test WebTargetProvider.get() with a null url - Client.target throws a NullPointerException
-        // We'd like to make sure it isn't suppressed.
+        //  We'd like to make sure it isn't suppressed.
     }
 }
