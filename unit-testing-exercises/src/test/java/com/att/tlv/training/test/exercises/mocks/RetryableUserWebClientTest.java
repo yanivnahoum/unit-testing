@@ -15,8 +15,7 @@ class RetryableUserWebClientTest {
 
     @BeforeEach
     void setUp() {
-        // TODO set up the client correctly
-        retryableClient = new RetryableUserWebClient(null, 3);
+        // TODO set up the RetryableUserWebClient correctly
     }
 
     @Test
