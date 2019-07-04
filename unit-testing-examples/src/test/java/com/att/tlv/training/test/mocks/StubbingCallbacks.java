@@ -37,7 +37,7 @@ class StubbingCallbacks {
         // Then we can either extract it from the 'invocation' argument above
         // by calling invocation.getArgument(0),  
         // or much simpler, use AdditionalAnswers.answer()
-        when(strings.add(anyString())).then(answer(this::logAdd));  
+        when(strings.add(anyString())).then(answer(this::isLengthGreaterThan5));
         assertThat(strings.add("Hey there!")).isTrue();
         assertThat(strings.add("Hey!")).isFalse();
         
@@ -47,8 +47,8 @@ class StubbingCallbacks {
         // Answer<Boolean> answer = answer(s -> s.length() == 2);
         Answer<Boolean> answer = answer((String s) -> s.length() == 2);
     }
-    
-    private boolean logAdd(String element) {
+
+    private boolean isLengthGreaterThan5(String element) {
         System.out.printf("adding [%s]%n", element);
         return element.length() > 5;
     }
