@@ -23,8 +23,6 @@ class VerifyingBehavior {
 
     @Mock
     private List<Integer> numbers;
-    @Mock
-    private List<String> someOtherMock;
 
     @Test
     void basicVerification() {
@@ -112,7 +110,7 @@ class VerifyingBehavior {
     }
     
     @Test
-    void verifyNoInteractions() {
+    void verifyNoInteractions(@Mock List<String> someOtherMock) {
         numbers.add(1);
 
         // Standard stuff

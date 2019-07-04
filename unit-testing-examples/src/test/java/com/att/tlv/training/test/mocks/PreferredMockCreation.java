@@ -1,5 +1,6 @@
 package com.att.tlv.training.test.mocks;
 
+import com.att.tlv.training.test.data.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 @ExtendWith(MockitoExtension.class)
 class PreferredMockCreation {
 
@@ -18,16 +20,20 @@ class PreferredMockCreation {
     private List<String> strings;
     @Mock
     private Map<Long, Map<String, List<String>>> complexMap;
-    
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
     }
-    
-    @SuppressWarnings("unused")
+
     @Test
     void test() {
         boolean added = strings.add("hello");
         Map<String, List<String>> previousValue = complexMap.put(10L, Collections.emptyMap());
+    }
+
+    @Test
+    void testWithLocalMock(@Mock List<Person> persons) {
+        Person person = persons.get(10);
     }
 }

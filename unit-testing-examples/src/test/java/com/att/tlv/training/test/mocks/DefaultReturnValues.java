@@ -128,5 +128,4 @@ class DefaultReturnValues {
         Integer value = ints.get(0);
         assertThat(value).isNull();
     }
-    
 }
