@@ -47,7 +47,7 @@ class GuavaCacheTest {
     @Test
     void testInvalidateExpiredKey() {
         // TODO Just like in the previous test, test cache.invalidate(key) with key, invalidating it AFTER it expires.
-        // Make sure the removal listener is notified with the correct key, value, and removal cause
+        //  Make sure the removal listener is notified with the correct key, value, and removal cause
     }
     
     @Test
@@ -69,6 +69,6 @@ class GuavaCacheTest {
     @Test
     void testReplaceExpiredKey() {
         // TODO Just like in the previous test, test replacing a key by putting it again in the cache AFTER it expires.
-        // Make sure the removal listener is notified with the correct key, value, and removal cause
+        //  Make sure the removal listener is notified with the correct key, value, and removal cause
     }
 }
