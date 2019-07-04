@@ -112,17 +112,13 @@ class DefaultReturnValues {
         assertThat(demo.getMe()).isNull();
     }
     
-    @Mock(answer = Answers.RETURNS_SELF)
-    private Demo fluentDemo;
     @Test
-    void assertThatMockedTypeReturnsItself() {
+    void assertThatMockedTypeReturnsItself(@Mock(answer = Answers.RETURNS_SELF) Demo fluentDemo) {
         assertThat(fluentDemo.getMe()).isSameAs(fluentDemo);
     }
-    
-    @Mock
-    private List<Integer> ints;
+
     @Test
-    void assertThatGenericParameterTypesAreTreatedAsObject() {
+    void assertThatGenericParameterTypesAreTreatedAsObject(@Mock List<Integer> ints) {
         // Although method get returns an Integer, it actually returns T, whose type is erased.
         // So we get the behavior of List<Object> - which returns null by default.
         Integer value = ints.get(0);
