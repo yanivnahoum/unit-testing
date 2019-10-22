@@ -16,7 +16,7 @@ import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class VerifyingBehavior {
@@ -36,10 +36,9 @@ class VerifyingBehavior {
         try {
             // This will fail of course
             verify(numbers).add(2);
-            
+
             failTest("We should never reach this line!");
-        }
-        catch (AssertionError ignore) {
+        } catch (AssertionError ignore) {
             // Do nothing
         }
     }
@@ -59,10 +58,9 @@ class VerifyingBehavior {
             verify(numbers).add(anyInt());
             // It's short for this:
             verify(numbers, times(1)).add(anyInt());
-            
+
             failTest("We should never reach this line!");
-        }
-        catch (AssertionError ignore) {
+        } catch (AssertionError ignore) {
             // Do nothing
         }
 
@@ -77,40 +75,39 @@ class VerifyingBehavior {
         // Or never!
         verify(numbers, never()).add(3);
     }
-    
+
     @Test
     void verifyInvocationOrder() {
         numbers.add(1);
         numbers.add(2);
-        
+
         // We already know this works
         verify(numbers).add(1);
         verify(numbers).add(2);
-        
+
         // But so does this. Order doesn't matter!
         verify(numbers).add(2);
         verify(numbers).add(1);
-        
+
         // But what if  it really does? InOrder at your service:
         InOrder inOrder = inOrder(numbers);
         inOrder.verify(numbers).add(1);
         inOrder.verify(numbers).add(2);
-        
+
         try {
             InOrder inOrder2 = inOrder(numbers);
             inOrder2.verify(numbers).add(2);
             // This will fail, add(1) is expected BEFORE add(2)
             inOrder2.verify(numbers).add(1);
-            
+
             failTest("We should never reach this line!");
-        }
-        catch (AssertionError ignore) {
+        } catch (AssertionError ignore) {
             // Do nothing
         }
     }
-    
+
     @Test
-    void verifyNoInteractions(@Mock List<String> someOtherMock) {
+    void verifyNoInteractionsWithMock(@Mock List<String> someOtherMock) {
         numbers.add(1);
 
         // Standard stuff
@@ -120,9 +117,9 @@ class VerifyingBehavior {
         verify(numbers, never()).add(2);
 
         // Verify that other mocks were not interacted with
-        verifyZeroInteractions(someOtherMock);
+        verifyNoInteractions(someOtherMock);
     }
-    
+
     private static void failTest(String message) {
         throw new UnsupportedOperationException(message);
     }
