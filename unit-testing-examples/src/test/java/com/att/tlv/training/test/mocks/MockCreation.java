@@ -13,7 +13,6 @@ import static org.mockito.Mockito.mock;
 class MockCreation {
     
     @Test
-    @SuppressWarnings("unused")
     void create() {
         // We can mock non-generic interfaces
         ExecutorService executorService = mock(ExecutorService.class);
@@ -26,9 +25,8 @@ class MockCreation {
         ArrayList<?> arrayList = mock(ArrayList.class);   
     }
 
-    @Disabled
+    @Disabled("This test fails with a MockitoException")
     @Test
-    @SuppressWarnings("unused")
     void cannotCreate() {
         // There are a few types we can't create:
         // Final classes / methods
