@@ -22,9 +22,10 @@ import static org.mockito.ArgumentMatchers.intThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.mockito.quality.Strictness.STRICT_STUBS;
+import static org.mockito.quality.Strictness.WARN;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = STRICT_STUBS)
+@MockitoSettings(strictness = WARN)
 class Stubbing {
 
     @Mock
@@ -190,7 +191,7 @@ class Stubbing {
         // Comment the following line to see mockito's unnecessary stubbing detection in action
         strings.get(5);
         // This can be bypassed, at the stub (lenient().when()...), mock (@Mock(lenient = true), or class (@MockSettings(strictness = LENIENT)) level.
-        // If following line were in a different class (not the test class) we'd get a "Strict stubbing argument mismatch"
+        // Even if we do call strings.get() but use a different argument (like 100 below) we still get a warning or StrictStubbingException
         // strings.get(100);
     }
 }

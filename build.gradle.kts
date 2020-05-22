@@ -17,10 +17,7 @@ subprojects {
     apply(plugin = "java")
 
     repositories {
-        mavenLocal()
-        maven {
-            url = uri("http://repo.maven.apache.org/maven2")
-        }
+        mavenCentral()
     }
 
     tasks.test {

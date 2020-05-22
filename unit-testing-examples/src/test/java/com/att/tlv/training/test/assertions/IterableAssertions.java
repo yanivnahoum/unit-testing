@@ -57,24 +57,22 @@ class IterableAssertions {
                 .containsAll(newArrayList(6, 3, 1))
                 .containsAll(newArrayList(6, 3, 1, 1, 1));
     }
-    
+
     @Test
     void test_containsOnly() {
         Iterable<String> animals = newArrayList("dog", "cat", "pig");
         Iterable<String> duplicatedAnimals = newArrayList("dog", "cat", "pig", "dog", "cat", "pig");
-        
+
         // With containsOnly, all the distinct elements must be present, and nothing else (but the order is not important)
         assertThat(duplicatedAnimals).containsOnly("dog", "cat", "pig")
                 .containsOnly("pig", "dog", "cat");
-        assertThat(animals).containsOnlyElementsOf(duplicatedAnimals)
-                // Alias of containsOnlyElementsOf
-                .hasSameElementsAs(duplicatedAnimals);        
+        assertThat(animals).hasSameElementsAs(duplicatedAnimals);
     }
 
     @Test
     void testIterable_containsExactly() {
         Iterable<String> animals = newArrayList("cat", "dog", "pig", "pig");
-        
+
         // Same elements, same order (same size too, i.e. duplicates included), and nothing else
         assertThat(animals).containsExactly("cat", "dog", "pig", "pig")
                 .containsOnly("pig", "cat", "dog")
@@ -88,7 +86,7 @@ class IterableAssertions {
         sortedAnimals.add("pig");
         assertThat(sortedAnimals).containsExactly("cat", "dog", "pig");
 
-        // Expected values can be given by another Iterable. Must be in the same order (unlike containsOnlyElementsOf)
+        // Expected values can be given by another Iterable. Must be in the same order (unlike hasSameElementsAs)
         assertThat(sortedAnimals).containsExactlyElementsOf(newArrayList("cat", "dog", "pig"));
     }
 
@@ -148,7 +146,7 @@ class IterableAssertions {
                 .contains(carl, atIndex(1));
 
         // And the same goes for arrays:
-        Person[] peopleArray = { jim, carl };
+        Person[] peopleArray = {jim, carl};
         assertThat(peopleArray).contains(jim, atIndex(0))
                 .contains(carl, atIndex(1));
 
@@ -174,7 +172,7 @@ class IterableAssertions {
         List<B> bs = newArrayList(new B("one"), new B("two"));
 
         Comparator<Object> a2b = (o1, o2) -> {
-            if (o1 instanceof  A && o2 instanceof B) {
+            if (o1 instanceof A && o2 instanceof B) {
                 A a = (A) o1;
                 B b = (B) o2;
                 if (Objects.equals(a.getName(), b.getName())) {
@@ -186,8 +184,8 @@ class IterableAssertions {
 
         assertThat(as).usingElementComparator(a2b).isEqualTo(bs);
         assertThat(as).extracting(a -> new B(a.getName()))
-                      .usingFieldByFieldElementComparator()
-                      .isEqualTo(bs);
+                .usingFieldByFieldElementComparator()
+                .isEqualTo(bs);
     }
 
     class A {
