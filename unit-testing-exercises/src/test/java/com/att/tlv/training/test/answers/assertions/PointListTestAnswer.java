@@ -79,10 +79,7 @@ class PointListTestAnswer {
     void copyOfHashSet_shouldReturnNewList_inAnyOrder() {
         Set<Point> source = newHashSet(P1, P2, P3);
         List<Point> copy = PointList.copyOf(source);
-        // HashSet iteration order is not predictable.
-        assertThat(copy).containsOnlyElementsOf(source)
-                        .hasSameSizeAs(source);
-        // or:
+
         assertThat(copy).hasSameElementsAs(source)
                         .hasSameSizeAs(source);
         // or even better:

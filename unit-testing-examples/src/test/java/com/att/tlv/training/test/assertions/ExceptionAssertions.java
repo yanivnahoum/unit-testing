@@ -60,7 +60,6 @@ class ExceptionAssertions {
 
     @Test
     void testCauseType() {
-
         Throwable throwable = new Throwable(new NullPointerException("boom"));
 
         assertThat(throwable).hasCause(new NullPointerException("boom"));
