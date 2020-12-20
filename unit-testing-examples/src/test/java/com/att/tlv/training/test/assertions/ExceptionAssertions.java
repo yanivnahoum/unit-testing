@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIOException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class ExceptionAssertions {
@@ -136,6 +137,11 @@ class ExceptionAssertions {
                                                     .matches(e -> e.getTotal() > 10)
                                                     // Or the condition - assertion failures will use our description
                                                     .has(aTotalGreaterThan10);
+
+        // Another possible syntax
+        MyException myException = catchThrowableOfType(this::throwMyException, MyException.class);
+        assertThat(myException.getMessage()).isEqualTo("An error occurred");
+        assertThat(myException.getTotal()).isGreaterThan(10);
     }
 
     private void throwMyException() throws MyException {
