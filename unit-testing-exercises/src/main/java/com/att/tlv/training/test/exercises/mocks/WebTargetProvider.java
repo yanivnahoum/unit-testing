@@ -1,7 +1,8 @@
 package com.att.tlv.training.test.exercises.mocks;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.WebTarget;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.WebTarget;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

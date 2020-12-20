@@ -4,13 +4,15 @@ plugins {
     java
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-}
-
 allprojects {
     group = "com.att.tlv.training"
     version = "1.0.0-SNAPSHOT"
+
+    tasks {
+        withType<JavaCompile>().configureEach {
+            options.release.set(11)
+        }
+    }
 }
 
 subprojects {
