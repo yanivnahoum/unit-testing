@@ -61,7 +61,7 @@ class ArgumentCaptorsAndMatchers {
         // Now that we've captured the value, let's get it
         IntPair intPair = pairCaptor.getValue();
         // And run some assertions on it
-        assertThat(intPair).isEqualToComparingFieldByField(new IntPair(x, y));
+        assertThat(intPair).usingRecursiveComparison().isEqualTo(new IntPair(x, y));
     }
     
     @Test

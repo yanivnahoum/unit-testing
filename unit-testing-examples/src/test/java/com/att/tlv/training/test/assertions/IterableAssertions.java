@@ -130,7 +130,7 @@ class IterableAssertions {
         // By default equals() is used, in Point's case - Object.equals() (reference equality)
         assertThat(points).doesNotContain(oneTwoClone);
         // But if we specify a field by field comparator:
-        assertThat(points).usingFieldByFieldElementComparator()
+        assertThat(points).usingRecursiveFieldByFieldElementComparator()
                 .contains(oneTwoClone);
 
     }
@@ -184,12 +184,12 @@ class IterableAssertions {
 
         assertThat(as).usingElementComparator(a2b).isEqualTo(bs);
         assertThat(as).extracting(a -> new B(a.getName()))
-                .usingFieldByFieldElementComparator()
+                .usingRecursiveComparison()
                 .isEqualTo(bs);
     }
 
-    class A {
-        private String name;
+    static class A {
+        private final String name;
 
         A(String name) {
             this.name = name;
@@ -205,8 +205,8 @@ class IterableAssertions {
         }
     }
 
-    class B {
-        private String name;
+    static class B {
+        private final String name;
 
         B(String name) {
             this.name = name;

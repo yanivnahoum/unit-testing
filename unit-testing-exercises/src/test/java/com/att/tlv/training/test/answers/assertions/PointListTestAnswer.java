@@ -44,21 +44,21 @@ class PointListTestAnswer {
     @Test
     void of_withSinglePointCoordinates_shouldReturnListOfPoint() {
         List<Point> list = PointList.of(P1.getX(), P1.getY());
-        assertThat(list).usingFieldByFieldElementComparator()
+        assertThat(list).usingRecursiveFieldByFieldElementComparator()
                 .containsExactly(P1);
     }
 
     @Test
     void of_withTwoPointCoordinates_shouldReturnListOfPoints() {
         List<Point> list = PointList.of(P1.getX(), P1.getY(), P2.getX(), P2.getY());
-        assertThat(list).usingFieldByFieldElementComparator()
+        assertThat(list).usingRecursiveFieldByFieldElementComparator()
                 .containsExactly(P1, P2);
     }
 
     @Test
     void of_withThreePointCoordinates_shouldReturnListOfPoints() {
         List<Point> list = PointList.of(P1.getX(), P1.getY(), P2.getX(), P2.getY(), P3.getX(), P3.getY());
-        assertThat(list).usingFieldByFieldElementComparator()
+        assertThat(list).usingRecursiveFieldByFieldElementComparator()
                 .containsExactly(P1, P2, P3);
     }
 

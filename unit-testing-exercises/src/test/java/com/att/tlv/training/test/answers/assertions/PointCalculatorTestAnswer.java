@@ -32,7 +32,7 @@ class PointCalculatorTestAnswer {
         
         // Or...        
         Point expected = new Point(expectedX, expectedY);
-        assertThat(result).isEqualToComparingFieldByField(expected);
+        assertThat(result).usingRecursiveComparison().isEqualTo(expected);
     }
     
     @Test
