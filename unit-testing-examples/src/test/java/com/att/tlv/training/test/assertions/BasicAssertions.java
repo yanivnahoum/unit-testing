@@ -2,6 +2,7 @@ package com.att.tlv.training.test.assertions;
 
 import com.att.tlv.training.test.data.Person;
 import com.att.tlv.training.test.data.Point;
+import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -89,17 +90,21 @@ class BasicAssertions {
     }
 
     @Test
-    void test_isEqualToComparingOnlyGivenFields_isEqualToComparingFieldByField() {
+    void test_usingRecursiveComparison_withComparedFields() {
         Point oneTwo = new Point(1, 2);
         Point oneTwoClone = new Point(1, 2);
 
         // Obviously the two objects are not equal (default equality compares references)...
+        var comparisonConfiguration = RecursiveComparisonConfiguration.builder()
+                .withComparedFields("x", "y")
+                .build();
         assertThat(oneTwo).isNotEqualTo(oneTwoClone)
                 // ...but the fields 'x' and 'y' are equal
-                .isEqualToComparingOnlyGivenFields(oneTwoClone, "x", "y");
+                .usingRecursiveComparison(comparisonConfiguration)
+                .isEqualTo(oneTwoClone);
 
         // If we just want to go over all fields / properties:
-        assertThat(oneTwo).isEqualToComparingFieldByField(oneTwoClone);
+        assertThat(oneTwo).usingRecursiveComparison().isEqualTo(oneTwoClone);
     }
 
     @Test
@@ -122,8 +127,7 @@ class BasicAssertions {
             // You can specify a test description with as() method or describedAs(), it supports String format args
             assertThat(john.getAge()).as("check %s's age", john.getName())
                     .isEqualTo(55);
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             assertThat(e).hasMessageContaining("[check John's age]");
         }
 
@@ -132,9 +136,8 @@ class BasicAssertions {
             // You can even specify your own error message
             assertThat(age).overridingErrorMessage("Expected %s's age to be 55, but it was %d instead!", john.getName(), age)
                     .isEqualTo(55);
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             assertThat(e).hasMessage("Expected John's age to be 55, but it was 30 instead!");
         }
-    }    
+    }
 }
