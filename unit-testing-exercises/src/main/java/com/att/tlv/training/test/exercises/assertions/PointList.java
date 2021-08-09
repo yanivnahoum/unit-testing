@@ -1,10 +1,11 @@
 package com.att.tlv.training.test.exercises.assertions;
 
 import com.att.tlv.training.test.exercises.data.Point;
-import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
 import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 public final class PointList {
     
@@ -16,7 +17,7 @@ public final class PointList {
      *  Returns an empty immutable list.
      */
     public static List<Point> empty() {
-        return ImmutableList.of();
+        return emptyList();
     }
     
     /**
@@ -25,7 +26,7 @@ public final class PointList {
      * @throws NullPointerException if {@code p} is null
      */
     public static List<Point> of(Point p) {
-        return ImmutableList.of(p);
+        return List.of(p);
     }
 
     /**
@@ -34,7 +35,7 @@ public final class PointList {
      * @throws NullPointerException if any element is null
      */
     public static List<Point> of(Point p1, Point p2) {
-        return ImmutableList.of(p1, p2);
+        return List.of(p1, p2);
     }
     
     /**
@@ -43,7 +44,7 @@ public final class PointList {
      * @throws NullPointerException if any element is null
      */
     public static List<Point> of(Point p1, Point p2, Point p3) {
-        return ImmutableList.of(p1, p2, p3);
+        return List.of(p1, p2, p3);
     }
     
     /**
@@ -51,7 +52,7 @@ public final class PointList {
      */    
     public static List<Point> of(int aX, int aY) {
         Point a = new Point(aX, aY);
-        return ImmutableList.of(a);
+        return List.of(a);
     }    
     
     /**
@@ -60,7 +61,7 @@ public final class PointList {
     public static List<Point> of(int aX, int aY, int bX, int bY) {
         Point a = new Point(aX, aY);
         Point b = new Point(bX, bY);
-        return ImmutableList.of(a, b);
+        return List.of(a, b);
     }   
     
     /**
@@ -70,7 +71,7 @@ public final class PointList {
         Point a = new Point(aX, aY);
         Point b = new Point(bX, bY);
         Point c = new Point(cX, cY);
-        return ImmutableList.of(a, b, c);
+        return List.of(a, b, c);
     }    
     
     /**
@@ -79,6 +80,6 @@ public final class PointList {
      * @throws NullPointerException if any of {@code elements} is null
      */
     public static List<Point> copyOf(Collection<? extends Point> points) {
-        return ImmutableList.copyOf(points);
+        return List.copyOf(points);
     }
 }

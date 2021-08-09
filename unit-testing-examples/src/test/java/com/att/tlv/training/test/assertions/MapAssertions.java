@@ -1,7 +1,6 @@
 package com.att.tlv.training.test.assertions;
 
 import com.att.tlv.training.test.data.Person;
-import com.google.common.collect.ImmutableMap;
 import org.junit.jupiter.api.Test;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
@@ -34,12 +33,12 @@ class MapAssertions {
         assertThat(persons).contains(entry(444L, jim), entry(555L, alice));
         // using java util Map.Entry
         assertThat(persons).contains(javaMapEntry(444L, jim), javaMapEntry(555L, alice));
-        
-        
+
+
         // Same assertion but different way of expressing it : no entry call needed but no varargs support.
         assertThat(persons).containsEntry(444L, jim)
                 .containsEntry(555L, alice);
-        
+
         // Opposite of contains/containsEntry
         assertThat(persons).doesNotContain(entry(777L, jim), entry(444L, alice));
         assertThat(persons).doesNotContainEntry(777L, jim);
@@ -56,23 +55,29 @@ class MapAssertions {
         assertThat(persons).containsValues(jim, alice);
         assertThat(persons).doesNotContainValue(new Person(777, "Yaniv", 30, 1.65d));
 
-        ImmutableMap<Integer, String> anotherMap = ImmutableMap.of(1, "one",
-                2, "two",
-                3, "three");
+        var anotherMap = Map.ofEntries(
+                entry(1, "one"),
+                entry(2, "two"),
+                entry(3, "three")
+        );
         assertThat(persons).hasSameSizeAs(anotherMap);
-        
+
         persons.clear();
         assertThat(persons).isEmpty();
     }
 
     @Test
     void testMap_containsAllEntriesOf() {
-        ImmutableMap<Integer, String> bigMap = ImmutableMap.of(1, "one",
-                2, "two",
-                3, "three");
-        
-        ImmutableMap<Integer, String> smallMap = ImmutableMap.of(1, "one",
-                2, "two");        
+        var bigMap = Map.ofEntries(
+                entry(1, "one"),
+                entry(2, "two"),
+                entry(3, "three")
+        );
+
+        var smallMap = Map.ofEntries(
+                entry(1, "one"),
+                entry(2, "two")
+        );
 
         assertThat(bigMap).containsAllEntriesOf(smallMap);
     }
@@ -93,10 +98,10 @@ class MapAssertions {
         assertThat(persons).containsExactly(entry(444L, jim), entry(555L, alice), entry(666L, carl));
 
     }
-    
+
     private static <T> BinaryOperator<T> throwingMerger() {
-        return (u,v) -> { throw new IllegalStateException(String.format("Duplicate key %s", u)); };
-    }    
+        return (u, v) -> {throw new IllegalStateException(String.format("Duplicate key %s", u));};
+    }
 
     private static <K, V> Map.Entry<K, V> javaMapEntry(K key, V value) {
         return new SimpleImmutableEntry<>(key, value);

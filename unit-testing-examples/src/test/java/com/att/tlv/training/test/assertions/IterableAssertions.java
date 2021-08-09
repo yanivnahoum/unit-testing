@@ -5,13 +5,13 @@ import com.att.tlv.training.test.data.Point;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.atIndex;
@@ -21,10 +21,10 @@ class IterableAssertions {
 
     @Test
     void iterableBasicAssertions() {
-        Iterable<String> animals = newArrayList("dog", "cat", "pig");
+        Iterable<String> animals = List.of("dog", "cat", "pig");
         assertThat(animals).isNotEmpty()
                 .hasSize(3);
-        assertThat(animals).hasSameSizeAs(newArrayList(1, 2, 3));
+        assertThat(animals).hasSameSizeAs(List.of(1, 2, 3));
         assertThat(animals).contains("cat", "pig")
                 .doesNotContain("tiger");
 
@@ -32,7 +32,7 @@ class IterableAssertions {
                 .doesNotHaveDuplicates();
 
         // Special check for null, empty collection or both
-        assertThat(newArrayList("Hello", null, "World")).containsNull()
+        assertThat(Arrays.asList("Hello", null, "World")).containsNull()
                 .isNotEmpty();
 
         List<Object> newArrayList = new ArrayList<>();
@@ -44,7 +44,7 @@ class IterableAssertions {
         assertThat(newArrayList).isNullOrEmpty();
 
         // you can also check the start or end of your collection/iterable
-        Iterable<Integer> numbers = newArrayList(1, 2, 3, 4, 5, 6);
+        Iterable<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         assertThat(numbers).startsWith(1, 2)
                 .endsWith(5, 6)
                 // Same order
@@ -54,14 +54,14 @@ class IterableAssertions {
                 // No order, all elements in the source iterable must be contained in the target
                 .isSubsetOf(6, 5, 4, 3, 2, 1, 0, -1)
                 // No order
-                .containsAll(newArrayList(6, 3, 1))
-                .containsAll(newArrayList(6, 3, 1, 1, 1));
+                .containsAll(List.of(6, 3, 1))
+                .containsAll(List.of(6, 3, 1, 1, 1));
     }
 
     @Test
     void test_containsOnly() {
-        Iterable<String> animals = newArrayList("dog", "cat", "pig");
-        Iterable<String> duplicatedAnimals = newArrayList("dog", "cat", "pig", "dog", "cat", "pig");
+        Iterable<String> animals = List.of("dog", "cat", "pig");
+        Iterable<String> duplicatedAnimals = List.of("dog", "cat", "pig", "dog", "cat", "pig");
 
         // With containsOnly, all the distinct elements must be present, and nothing else (but the order is not important)
         assertThat(duplicatedAnimals).containsOnly("dog", "cat", "pig")
@@ -71,7 +71,7 @@ class IterableAssertions {
 
     @Test
     void testIterable_containsExactly() {
-        Iterable<String> animals = newArrayList("cat", "dog", "pig", "pig");
+        Iterable<String> animals = List.of("cat", "dog", "pig", "pig");
 
         // Same elements, same order (same size too, i.e. duplicates included), and nothing else
         assertThat(animals).containsExactly("cat", "dog", "pig", "pig")
@@ -87,17 +87,17 @@ class IterableAssertions {
         assertThat(sortedAnimals).containsExactly("cat", "dog", "pig");
 
         // Expected values can be given by another Iterable. Must be in the same order (unlike hasSameElementsAs)
-        assertThat(sortedAnimals).containsExactlyElementsOf(newArrayList("cat", "dog", "pig"));
+        assertThat(sortedAnimals).containsExactlyElementsOf(List.of("cat", "dog", "pig"));
     }
 
     @Test
     void testIterableWithCustomComparator() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
-        Iterable<Person> people = newArrayList(jim, carl);
+        Iterable<Person> people = List.of(jim, carl);
 
         Person alice = new Person(555, "Alice", 30, 1.65d);
-        // By default equals() is used, in Person's case - comparing ids
+        // By default, equals() is used, in Person's case - comparing ids
         assertThat(people).doesNotContain(alice);
 
         // But if we specify a custom comparator that compares ages:
@@ -110,7 +110,7 @@ class IterableAssertions {
     void testIterableWithExtractedValues() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
-        Iterable<Person> people = newArrayList(jim, carl);
+        Iterable<Person> people = List.of(jim, carl);
 
         // Sort of like Stream::map
         assertThat(people).extracting(Person::getAge)
@@ -124,7 +124,7 @@ class IterableAssertions {
     void testIterableWithFieldByFieldComparison() {
         Point oneTwo = new Point(1, 2);
         Point oneThree = new Point(1, 3);
-        Iterable<Point> points = newArrayList(oneTwo, oneThree);
+        Iterable<Point> points = List.of(oneTwo, oneThree);
 
         Point oneTwoClone = new Point(1, 2);
         // By default equals() is used, in Point's case - Object.equals() (reference equality)
@@ -141,7 +141,7 @@ class IterableAssertions {
         Person carl = new Person(666, "Carl", 20, 1.95d);
 
         // For lists, you can check element at a given index (we use Assertions.atIndex(int) syntactic sugar for better readability):
-        List<Person> people = newArrayList(jim, carl);
+        List<Person> people = List.of(jim, carl);
         assertThat(people).contains(jim, atIndex(0))
                 .contains(carl, atIndex(1));
 
@@ -156,7 +156,7 @@ class IterableAssertions {
     void testWithPredicate() {
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
-        List<Person> people = newArrayList(jim, carl);
+        List<Person> people = List.of(jim, carl);
 
         assertThat(people).allMatch(p -> p.getAge() > 18);
         assertThat(people).anyMatch(p -> p.getId() == 666);
@@ -168,8 +168,8 @@ class IterableAssertions {
 
     @Test
     void testIterablesOfDifferentTypes() {
-        List<A> as = newArrayList(new A("one"), new A("two"));
-        List<B> bs = newArrayList(new B("one"), new B("two"));
+        List<A> as = List.of(new A("one"), new A("two"));
+        List<B> bs = List.of(new B("one"), new B("two"));
 
         Comparator<Object> a2b = (o1, o2) -> {
             if (o1 instanceof A && o2 instanceof B) {

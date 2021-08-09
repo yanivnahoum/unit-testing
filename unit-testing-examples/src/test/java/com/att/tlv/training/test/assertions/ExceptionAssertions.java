@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -20,14 +19,13 @@ class ExceptionAssertions {
     @Test
     void testBasicExceptionAssertions() {
 
-        List<String> list = newArrayList("zero", "one", "two", "three", "four");
+        List<String> list = List.of("zero", "one", "two", "three", "four");
 
         assertThat(list).hasSize(5);
 
         try {
             list.get(9); // Boom!
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // You can check exception type
             assertThat(e).isInstanceOf(IndexOutOfBoundsException.class);
 
@@ -50,12 +48,12 @@ class ExceptionAssertions {
 
             // Sometimes message are not entirely predictable, you can then check for start, end or containing string.
             assertThat(e).hasMessageStartingWith("Index")
-                         .hasMessageContaining("9")
-                         .hasMessageEndingWith("5");
+                    .hasMessageContaining("9")
+                    .hasMessageEndingWith("5");
             // This is equivalent to:
             assertThat(e.getMessage()).startsWith("Index")
-                                      .contains("9")
-                                      .endsWith("5");
+                    .contains("9")
+                    .endsWith("5");
         }
     }
 
@@ -73,8 +71,7 @@ class ExceptionAssertions {
         assertThat(throwable).hasCauseExactlyInstanceOf(NullPointerException.class);
         try {
             assertThat(throwable).hasCauseExactlyInstanceOf(RuntimeException.class);
-        }
-        catch (AssertionError e) {
+        } catch (AssertionError e) {
             e.printStackTrace();
         }
 
@@ -90,11 +87,9 @@ class ExceptionAssertions {
 
     @Test
     void test_assertThatThrownBy() {
-        // @formatter:off
         assertThatThrownBy(() -> validate(-1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Invalid");
-        // @formatter:on
     }
 
     private void validate(int value) {
@@ -105,16 +100,13 @@ class ExceptionAssertions {
 
     @Test
     void test_assertThatExceptionOfType() {
-        assertThatExceptionOfType(IOException.class).isThrownBy(() -> { throw new IOException("boom!"); })
-                                                    .withMessage("boom!")
-                                                    .withMessageContaining("oom")
-                                                    .withMessage("%s!", "boom")
-                                                    .withStackTraceContaining("IOException")
-                                                    .withNoCause();
+        assertThatExceptionOfType(IOException.class).isThrownBy(() -> {throw new IOException("boom!");})
+                .withMessage("boom!")
+                .withNoCause();
 
         // Shortcut for IOException, NullPointerException, IllegalArgumentException, IllegalStateException:
-        assertThatIOException().isThrownBy(() -> { throw new IOException("boom!"); })
-                               .withMessage("boom!");
+        assertThatIOException().isThrownBy(() -> {throw new IOException("boom!");})
+                .withMessage("boom!");
     }
 
     @Test
@@ -132,11 +124,11 @@ class ExceptionAssertions {
         Condition<MyException> aTotalGreaterThan10 = new Condition<>(e -> e.getTotal() > 10, "a total that is greater than 10");
 
         assertThatExceptionOfType(MyException.class).isThrownBy(this::throwMyException)
-                                                    .withMessage("An error occurred")
-                                                    // We can use the predicate directly
-                                                    .matches(e -> e.getTotal() > 10)
-                                                    // Or the condition - assertion failures will use our description
-                                                    .has(aTotalGreaterThan10);
+                .withMessage("An error occurred")
+                // We can use the predicate directly
+                .matches(e -> e.getTotal() > 10)
+                // Or the condition - assertion failures will use our description
+                .has(aTotalGreaterThan10);
 
         // Another possible syntax
         MyException myException = catchThrowableOfType(this::throwMyException, MyException.class);
