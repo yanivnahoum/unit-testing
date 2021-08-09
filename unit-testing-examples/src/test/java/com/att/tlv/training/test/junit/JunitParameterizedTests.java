@@ -59,7 +59,7 @@ class JunitParameterizedTests {
     @ParameterizedTest
     @MethodSource("maxShouldReturnGreaterNumber")
     void maxShouldJustWork(int x, int y, int expected) {
-        Calculator calculator = new Calculator();
+        var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
     }
@@ -75,7 +75,7 @@ class JunitParameterizedTests {
     @ParameterizedTest
     @MethodSource
     void maxShouldReturnGreaterNumber(int x, int y, int expected) {
-        Calculator calculator = new Calculator();
+        var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
     }
@@ -87,7 +87,7 @@ class JunitParameterizedTests {
         int y = accessor.getInteger(1);
         int expected = accessor.getInteger(2);
 
-        Calculator calculator = new Calculator();
+        var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
     }

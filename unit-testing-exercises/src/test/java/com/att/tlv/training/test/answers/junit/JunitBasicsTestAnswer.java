@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 class JunitBasicsTestAnswer {
     
     @BeforeAll
-    static void setUpClass() {
+    static void beforeAll() {
         System.out.println("Running set up before class...");
     }
     
     @AfterEach
-    void tearDown() {
+    void afterEach() {
         System.out.println("Running tear down after test...");
     }    
     
