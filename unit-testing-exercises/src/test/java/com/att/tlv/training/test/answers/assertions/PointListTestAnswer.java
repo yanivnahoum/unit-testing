@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -70,7 +69,7 @@ class PointListTestAnswer {
 
     @Test
     void copyOfList_shouldReturnNewIdenticalList() {
-        List<Point> source = newArrayList(P1, P2, P3);
+        List<Point> source = List.of(P1, P2, P3);
         List<Point> copy = PointList.copyOf(source);
         assertThat(copy).containsExactlyElementsOf(source);
     }
