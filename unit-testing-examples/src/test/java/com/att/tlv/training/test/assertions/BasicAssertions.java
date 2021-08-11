@@ -5,7 +5,6 @@ import com.att.tlv.training.test.data.Point;
 import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -44,7 +43,7 @@ class BasicAssertions {
 
     @Test
     void test_isIn_isNotIn() {
-        List<Integer> ints = Arrays.asList(10, 20, 30);
+        List<Integer> ints = List.of(10, 20, 30);
 
         assertThat(20).isIn(ints);
         assertThat(40).isNotIn(ints);

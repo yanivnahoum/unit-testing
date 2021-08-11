@@ -63,7 +63,7 @@ class ExceptionAssertions {
 
         assertThat(throwable).hasCause(new NullPointerException("boom"));
 
-        // hasCauseInstanceOf will match inheritance.
+        // hasCauseInstanceOf will match super class.
         assertThat(throwable).hasCauseInstanceOf(NullPointerException.class);
         assertThat(throwable).hasCauseInstanceOf(RuntimeException.class);
 
@@ -75,14 +75,14 @@ class ExceptionAssertions {
             e.printStackTrace();
         }
 
-        Throwable throwable_root = new Throwable(new IllegalStateException(new NullPointerException()));
+        Throwable throwableRoot = new Throwable(new IllegalStateException(new NullPointerException()));
 
-        // hasRootCauseInstanceOf will match inheritance
-        assertThat(throwable_root).hasRootCauseInstanceOf(NullPointerException.class);
-        assertThat(throwable_root).hasRootCauseInstanceOf(RuntimeException.class);
+        // hasRootCauseInstanceOf will match super class
+        assertThat(throwableRoot).hasRootCauseInstanceOf(NullPointerException.class);
+        assertThat(throwableRoot).hasRootCauseInstanceOf(RuntimeException.class);
 
         // hasRootCauseExactlyInstanceOf will match only exact same type
-        assertThat(throwable_root).hasRootCauseExactlyInstanceOf(NullPointerException.class);
+        assertThat(throwableRoot).hasRootCauseExactlyInstanceOf(NullPointerException.class);
     }
 
     @Test
