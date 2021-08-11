@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -171,21 +169,17 @@ class IterableAssertions {
         List<A> as = List.of(new A("one"), new A("two"));
         List<B> bs = List.of(new B("one"), new B("two"));
 
-        Comparator<Object> a2b = (o1, o2) -> {
-            if (o1 instanceof A && o2 instanceof B) {
-                A a = (A) o1;
-                B b = (B) o2;
-                if (Objects.equals(a.getName(), b.getName())) {
-                    return 0;
-                }
-            }
-            return 1;
-        };
-
-        assertThat(as).usingElementComparator(a2b).isEqualTo(bs);
-        assertThat(as).extracting(a -> new B(a.getName()))
-                .usingRecursiveComparison()
+        assertThat(as).usingRecursiveComparison()
                 .isEqualTo(bs);
+
+        try {
+            // This fails:
+            assertThat(as).usingRecursiveComparison()
+                    .withStrictTypeChecking()
+                    .isEqualTo(bs);
+        } catch (AssertionError e) {
+            e.printStackTrace();
+        }
     }
 
     static class A {

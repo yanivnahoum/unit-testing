@@ -84,7 +84,6 @@ class MapAssertions {
 
     @Test
     void testMap_containsOnly_containsExactly() {
-
         Person jim = new Person(444, "Jim", 30, 1.85d);
         Person alice = new Person(555, "Alice", 30, 1.65d);
         Person carl = new Person(666, "Carl", 20, 1.95d);
