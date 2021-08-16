@@ -64,6 +64,9 @@ class LinkedHashMapTestAnswer {
         assertThat(copy).containsAllEntriesOf(source)
                 // ...and nothing else
                 .hasSameSizeAs(source);
+
+        // More expressive:
+        assertThat(copy).containsExactlyInAnyOrderEntriesOf(source);
         
         // or:
         assertThat(copy).containsOnly(entry(ALICE.getId(), ALICE), entry(BOB.getId(), BOB), entry(CARL.getId(), CARL));
