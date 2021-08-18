@@ -18,12 +18,12 @@ class RestClientTest {
     @Test
     void get_shouldCallSetRequestPath_andHeader_andReturnOkResponse() {
         // TODO test RestClient.get() happy scenario
-        // Verify all required behavior
+        //  Verify all required behavior
     }
     
     @Test
     void whenClientThrowsException_get_shouldReturnInternalServerErrorResponse() {
         // TODO test RestClient.get() unhappy scenario - webTargetProvider.get() throws.
-        // Verify all required behavior
+        //  Verify all required behavior
     }
 }

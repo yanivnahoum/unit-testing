@@ -17,6 +17,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class VerifyingBehavior {
@@ -116,6 +117,8 @@ class VerifyingBehavior {
         // We know this one too
         verify(numbers, never()).add(2);
 
+        // Make sure all interactions have been verified, none have been left out
+        verifyNoMoreInteractions(numbers);
         // Verify that other mocks were not interacted with
         verifyNoInteractions(someOtherMock);
     }
