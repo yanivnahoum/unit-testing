@@ -16,12 +16,12 @@
         <revision>1.0.0-SNAPSHOT</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <guava.version>30.1.1-jre</guava.version>
-        <jersey-client.version>3.0.2</jersey-client.version>
-        <junit-jupiter.version>5.7.2</junit-jupiter.version>
-        <mockito.version>3.12.3</mockito.version>
-        <assertj.version>3.20.2</assertj.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <guava.version>31.1-jre</guava.version>
+        <jersey-client.version>3.0.5</jersey-client.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <mockito.version>4.6.1</mockito.version>
+        <assertj.version>3.23.1</assertj.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     </properties>
 
