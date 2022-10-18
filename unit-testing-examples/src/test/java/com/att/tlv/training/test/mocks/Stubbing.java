@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 //@MockitoSettings(strictness = WARN)
 class Stubbing {
 
-    @Mock(strictness = Mock.Strictness.LENIENT)
+    @Mock
     private List<String> strings;
     @Mock
     private List<Person> persons;
@@ -186,7 +186,7 @@ class Stubbing {
     void unnecessaryStubbing() {
         when(strings.get(5)).thenReturn("hello");
         // Comment the following line to see mockito's unnecessary stubbing detection in action
-//        strings.get(5);
+        strings.get(5);
         // This can be bypassed, at the stub (lenient().when()...), mock (@Mock(strictness = Mock.Strictness.LENIENT) or class (@MockSettings(strictness = LENIENT)) level.
         // Even if we do call strings.get() but use a different argument (like 100 below) we still get a warning or StrictStubbingException
         // strings.get(100);
