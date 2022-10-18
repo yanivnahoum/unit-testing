@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.util.List;
 
@@ -21,14 +20,12 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.intThat;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
-import static org.mockito.quality.Strictness.STRICT_STUBS;
-import static org.mockito.quality.Strictness.WARN;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = WARN)
+//@MockitoSettings(strictness = WARN)
 class Stubbing {
 
-    @Mock
+    @Mock(strictness = Mock.Strictness.LENIENT)
     private List<String> strings;
     @Mock
     private List<Person> persons;
@@ -168,7 +165,7 @@ class Stubbing {
     @Test
     void stubbingVoidMethods() {
         // Unfortunately, this doesn't compile
-        // when(strings.clear()).thenThrow(new IllegalArgumentException());
+//         when(strings.clear()).thenThrow(new IllegalArgumentException());
         
         // For void methods, use doThrow instead. Note the method call outside of the when clause.
         doThrow(new IllegalArgumentException()).when(strings).clear();
@@ -189,8 +186,8 @@ class Stubbing {
     void unnecessaryStubbing() {
         when(strings.get(5)).thenReturn("hello");
         // Comment the following line to see mockito's unnecessary stubbing detection in action
-        strings.get(5);
-        // This can be bypassed, at the stub (lenient().when()...), mock (@Mock(lenient = true), or class (@MockSettings(strictness = LENIENT)) level.
+//        strings.get(5);
+        // This can be bypassed, at the stub (lenient().when()...), mock (@Mock(strictness = Mock.Strictness.LENIENT) or class (@MockSettings(strictness = LENIENT)) level.
         // Even if we do call strings.get() but use a different argument (like 100 below) we still get a warning or StrictStubbingException
         // strings.get(100);
     }
