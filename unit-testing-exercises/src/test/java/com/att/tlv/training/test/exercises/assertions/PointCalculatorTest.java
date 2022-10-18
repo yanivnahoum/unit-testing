@@ -28,12 +28,12 @@ class PointCalculatorTest {
     @Test
     void add_pointAndOrigin_shouldReturnPoint() {
         // TODO test PointCalculator.add. Make sure it
-        // returns the non-origin Point p when p and an origin point are added (in that order).
+        //  returns the non-origin Point p when p and an origin point are added (in that order).
     }
     
     @Test
     void add_originAndPoint_shouldReturnPoint() {
         // TODO test PointCalculator.add. Make sure it
-        // returns the non-origin Point p when origin point and p are added (in that order).
+        //  returns the non-origin Point p when origin point and p are added (in that order).
     }
 }

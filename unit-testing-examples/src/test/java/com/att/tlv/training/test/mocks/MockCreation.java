@@ -20,7 +20,7 @@ class MockCreation {
         Exception exception = mock(Exception.class);
         
         // We can mock generic interfaces
-        List<?> list = mock(List.class);   
+        List<?> list = mock(List.class);
         // We can mock generic concrete classes as well
         ArrayList<?> arrayList = mock(ArrayList.class);   
     }
