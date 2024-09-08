@@ -8,13 +8,16 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.FieldSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.DayOfWeek;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Named.named;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.MATCH_ALL;
 
@@ -74,6 +77,7 @@ class JunitParameterizedTests {
 
     @ParameterizedTest
     @MethodSource
+    @SuppressWarnings("java:S4144")
     void maxShouldReturnGreaterNumber(int x, int y, int expected) {
         var calculator = new Calculator();
         int actual = calculator.max(x, y);
@@ -90,6 +94,44 @@ class JunitParameterizedTests {
         var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Nested
+    class FieldSources {
+        private Calculator calculator;
+
+        @BeforeEach
+        void setUp() {
+            calculator = new Calculator();
+        }
+
+        @ParameterizedTest
+        @FieldSource("absArguments")
+        void givenValue_theAbsShouldReturnAbsolute(int input, int expected) {
+            int actual = calculator.abs(input);
+            assertThat(actual).isEqualTo(expected);
+        }
+
+        static Supplier<Stream<Arguments>> absArguments = () -> Stream.of(
+                arguments(-1, 1),
+                arguments(0, 0),
+                arguments(1, 1)
+        );
+
+        @ParameterizedTest
+        @FieldSource
+        void absShouldReturnAbsolute(AbsArguments args) {
+            int actual = calculator.abs(args.input());
+            assertThat(actual).isEqualTo(args.expected());
+        }
+
+        record AbsArguments(int input, int expected) {}
+
+        static Supplier<Stream<Arguments>> absShouldReturnAbsolute = () -> Stream.of(
+                arguments(named("Negative", new AbsArguments(-1, 1))),
+                arguments(named("Zero", new AbsArguments(0, 0))),
+                arguments(named("Positive", new AbsArguments(1, 1)))
+        );
     }
 
     @Nested
