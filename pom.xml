@@ -4,7 +4,7 @@
 
     <groupId>com.att.tlv.training</groupId>
     <artifactId>unit-testing</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -13,16 +13,19 @@
     </modules>
 
     <properties>
-        <revision>1.0.0-SNAPSHOT</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <guava.version>33.3.0-jre</guava.version>
-        <jersey-client.version>3.1.8</jersey-client.version>
-        <junit-jupiter.version>5.11.0</junit-jupiter.version>
-        <mockito.version>5.13.0</mockito.version>
-        <assertj.version>3.26.3</assertj.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.5.0</maven-surefire-plugin.version>
+        <mockito.version>5.18.0</mockito.version>
+        <argLine>
+            -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+            -Xshare:off
+        </argLine>
+        <guava.version>33.4.8-jre</guava.version>
+        <jersey-client.version>3.1.10</jersey-client.version>
+        <junit-jupiter.version>5.13.3</junit-jupiter.version>
+        <assertj.version>3.27.3</assertj.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>

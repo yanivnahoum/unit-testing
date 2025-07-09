@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.att.tlv.training</groupId>
         <artifactId>unit-testing</artifactId>
-        <version>${revision}</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>unit-testing-exercises</artifactId>

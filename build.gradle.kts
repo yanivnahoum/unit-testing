@@ -7,19 +7,19 @@ plugins {
 allprojects {
     group = "com.att.tlv.training"
     version = "1.0.0-SNAPSHOT"
-
-    tasks {
-        withType<JavaCompile>().configureEach {
-            options.release.set(21)
-        }
-    }
 }
 
 subprojects {
-    apply(plugin = "java")
-
     repositories {
         mavenCentral()
+    }
+
+    apply(plugin = "java")
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
     }
 
     tasks.test {
