@@ -18,10 +18,17 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Named.named;
+import static org.junit.jupiter.params.provider.Arguments.argumentSet;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.MATCH_ALL;
 
 class JunitParameterizedTests {
+    private Calculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new Calculator();
+    }
 
     @ParameterizedTest
     @EmptySource
@@ -33,13 +40,6 @@ class JunitParameterizedTests {
 
     @Nested
     class CalculatorTest {
-        private Calculator calculator;
-
-        @BeforeEach
-        void setUp() {
-            calculator = new Calculator();
-        }
-
         @ParameterizedTest
         @ValueSource(ints = {-2, 0, 4, 20, 100})
         void isEven(int value) {
@@ -48,11 +48,12 @@ class JunitParameterizedTests {
         }
 
         @ParameterizedTest
-        @CsvSource({
-                "1, 1",
-                "0, 0",
-                "-1, 1"
-        })
+        @CsvSource(textBlock = """
+                1, 1,
+                0, 0,
+                -1, 1
+                """
+        )
         void absShouldReturnAbsolute(int input, int expected) {
             int actual = calculator.abs(input);
             assertThat(actual).isEqualTo(expected);
@@ -62,7 +63,6 @@ class JunitParameterizedTests {
     @ParameterizedTest
     @MethodSource("maxShouldReturnGreaterNumber")
     void maxShouldJustWork(int x, int y, int expected) {
-        var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
     }
@@ -79,7 +79,6 @@ class JunitParameterizedTests {
     @MethodSource
     @SuppressWarnings("java:S4144")
     void maxShouldReturnGreaterNumber(int x, int y, int expected) {
-        var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
     }
@@ -91,20 +90,27 @@ class JunitParameterizedTests {
         int y = accessor.getInteger(1);
         int expected = accessor.getInteger(2);
 
-        var calculator = new Calculator();
         int actual = calculator.max(x, y);
         assertThat(actual).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource
+    void absShouldReturnAbsolute(int input, int expected) {
+        int actual = calculator.abs(input);
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> absShouldReturnAbsolute() {
+        return Stream.of(
+                argumentSet("Positive", 1, 1),
+                argumentSet("Zero", 0, 0),
+                argumentSet("Negative", -1, 1)
+        );
+    }
+
     @Nested
     class FieldSources {
-        private Calculator calculator;
-
-        @BeforeEach
-        void setUp() {
-            calculator = new Calculator();
-        }
-
         @ParameterizedTest
         @FieldSource("absArguments")
         void givenValue_theAbsShouldReturnAbsolute(int input, int expected) {
@@ -113,9 +119,9 @@ class JunitParameterizedTests {
         }
 
         static Supplier<Stream<Arguments>> absArguments = () -> Stream.of(
-                arguments(-1, 1),
-                arguments(0, 0),
-                arguments(1, 1)
+                argumentSet("Positive", 1, 1),
+                argumentSet("Zero", 0, 0),
+                argumentSet("Negative", -1, 1)
         );
 
         @ParameterizedTest
@@ -136,7 +142,6 @@ class JunitParameterizedTests {
 
     @Nested
     class EnumSources {
-
         @ParameterizedTest
         @EnumSource(DayOfWeek.class)
         void enumSourceValue_shouldBeBetween1And7(DayOfWeek dayOfWeek) {
@@ -145,12 +150,11 @@ class JunitParameterizedTests {
         }
 
         @ParameterizedTest
-        @EnumSource(value = DayOfWeek.class, mode = MATCH_ALL,
-                names = {"^.+DAY$", "^(T|S).+$"})
+        @EnumSource(value = DayOfWeek.class, names = {"^.+DAY$", "^(T|S).+$"}, mode = MATCH_ALL)
         void enumSourceMatchesCondition(DayOfWeek dayOfWeek) {
             String name = dayOfWeek.name();
             assertThat(name).matches(day -> (day.startsWith("T") || day.startsWith("S"))
-                    && day.endsWith("DAY"));
+                                            && day.endsWith("DAY"));
         }
     }
 }
