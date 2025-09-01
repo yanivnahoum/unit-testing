@@ -14,13 +14,14 @@ class TestOrder {
     void first() {
     }
 
+    @Order(2)
+    @Test
+    void second() {
+    }
+
     @Order(3)
     @Test
     void third() {
     }
 
-    @Order(2)
-    @Test
-    void test2() {
-    }
 }
